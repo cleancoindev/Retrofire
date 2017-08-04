@@ -15,6 +15,8 @@
 		E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E41425591F34733E00E7CCAF /* Main.storyboard */; };
 		E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E414255C1F34733E00E7CCAF /* Assets.xcassets */; };
 		E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */; };
+		E414256C1F347CD600E7CCAF /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E414256B1F347CD600E7CCAF /* Explosion.sks */; };
+		E414256E1F347FEF00E7CCAF /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E414256D1F347FEF00E7CCAF /* Sand.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		E414255C1F34733E00E7CCAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E414255F1F34733E00E7CCAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E41425611F34733E00E7CCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E414256B1F347CD600E7CCAF /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		E414256D1F347FEF00E7CCAF /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = Sand.sks; path = "../../../Downloads/SpaceGameReloaded-master/SpacegameReloaded/Sand.sks"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				E414254F1F34733E00E7CCAF /* AppDelegate.swift */,
 				E41425511F34733E00E7CCAF /* GameScene.sks */,
 				E41425531F34733E00E7CCAF /* Actions.sks */,
+				E414256B1F347CD600E7CCAF /* Explosion.sks */,
+				E414256D1F347FEF00E7CCAF /* Sand.sks */,
 				E41425551F34733E00E7CCAF /* GameScene.swift */,
 				E41425571F34733E00E7CCAF /* GameViewController.swift */,
 				E41425591F34733E00E7CCAF /* Main.storyboard */,
@@ -133,11 +139,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E414256E1F347FEF00E7CCAF /* Sand.sks in Resources */,
 				E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */,
 				E41425521F34733E00E7CCAF /* GameScene.sks in Resources */,
 				E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */,
 				E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */,
 				E41425541F34733E00E7CCAF /* Actions.sks in Resources */,
+				E414256C1F347CD600E7CCAF /* Explosion.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
