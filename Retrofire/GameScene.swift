@@ -21,6 +21,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    var gameTimer:Timer!
+    
+    var possibleScenery = ["destructible-1", "destructible-2", "destructible-3", "destructible-4", "destructible-5", "destructible-6", "indestructible-1", "indestructible-2", "indestructible-3", "indestructible-4"]
+    
+    let sceneryCategory:UInt32 = 0x1 << 1 // gives each category a unique identifier to detect collisions
+    let tankShellCategory:UInt32 = 0x1 << 0 // diff type of bit shift
     
     override func didMove(to view: SKView) {
         
@@ -51,6 +57,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scoreLabel)
         
+        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
+        
+        }
+    
+    func addScenery () {
+        possibleScenery = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: possibleScenery) as! [String]
+        let scenery = SKSpriteNode(imageNamed: possibleScenery[0])
+        scenery.texture!.filteringMode = .nearest
+        scenery.setScale(6)
+        let generatePosition = GKRandomDistribution(lowestValue: -Int(self.size.width) / 2, highestValue: Int(self.size.width) / 2) // check if works
+        let position = CGFloat(generatePosition.nextInt())
+        scenery.position = CGPoint(x: position, y: 0.9 * self.size.height + scenery.size.height) //gen on screen? maybe remove +
+        scenery.physicsBody = SKPhysicsBody(rectangleOf: scenery.size)
+        scenery.physicsBody?.isDynamic = true
+        
+        scenery.physicsBody?.categoryBitMask = sceneryCategory
+        scenery.physicsBody?.contactTestBitMask = tankShellCategory
+        scenery.physicsBody?.collisionBitMask = 0
+        
+        self.addChild(scenery)
+        
+        let animationDuration:TimeInterval = 10 // MAKE RANDOM TO MAKE GAME MORE DIFFICULT, DECREASE FOR HIGHER DIFFICULTY. MUST MATCH BACKGROUND SPEED: animationDuration 10 == Sand.sks speed 152.8
+        
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.move(to: CGPoint(x: position, y: -0.1 * self.size.height - scenery.size.height), duration: animationDuration))
+        actionArray.append(SKAction.removeFromParent()) // removes to prevent constantly adding more to memory - look at number of nodes
+        
+        scenery.run(SKAction.sequence(actionArray))
+    
     }
     
     override func update(_ currentTime: TimeInterval) {
