@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletNode.physicsBody?.collisionBitMask = 0
         bulletNode.physicsBody?.usesPreciseCollisionDetection = true
         
-        bulletNode.setScale(8)
+        bulletNode.setScale(12)
         
         self.addChild(bulletNode)
         
