@@ -17,6 +17,8 @@
 		E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */; };
 		E414256C1F347CD600E7CCAF /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E414256B1F347CD600E7CCAF /* Explosion.sks */; };
 		E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E4BCA6F01F36392C009D0D2E /* Sand.sks */; };
+		E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B201F3726EB00C9878E /* bullet.mp3 */; };
+		E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B211F3726EB00C9878E /* explosion.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		E41425611F34733E00E7CCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E414256B1F347CD600E7CCAF /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		E4BCA6F01F36392C009D0D2E /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sand.sks; sourceTree = "<group>"; };
+		E4FF4B201F3726EB00C9878E /* bullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullet.mp3; sourceTree = "<group>"; };
+		E4FF4B211F3726EB00C9878E /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,19 +68,29 @@
 		E414254E1F34733E00E7CCAF /* Retrofire */ = {
 			isa = PBXGroup;
 			children = (
+				E41425551F34733E00E7CCAF /* GameScene.swift */,
+				E41425571F34733E00E7CCAF /* GameViewController.swift */,
 				E414254F1F34733E00E7CCAF /* AppDelegate.swift */,
 				E41425511F34733E00E7CCAF /* GameScene.sks */,
 				E41425531F34733E00E7CCAF /* Actions.sks */,
 				E414256B1F347CD600E7CCAF /* Explosion.sks */,
 				E4BCA6F01F36392C009D0D2E /* Sand.sks */,
-				E41425551F34733E00E7CCAF /* GameScene.swift */,
-				E41425571F34733E00E7CCAF /* GameViewController.swift */,
 				E41425591F34733E00E7CCAF /* Main.storyboard */,
-				E414255C1F34733E00E7CCAF /* Assets.xcassets */,
 				E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */,
 				E41425611F34733E00E7CCAF /* Info.plist */,
+				E414255C1F34733E00E7CCAF /* Assets.xcassets */,
+				E4FF4B1F1F3726EB00C9878E /* Sounds */,
 			);
 			path = Retrofire;
+			sourceTree = "<group>";
+		};
+		E4FF4B1F1F3726EB00C9878E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E4FF4B201F3726EB00C9878E /* bullet.mp3 */,
+				E4FF4B211F3726EB00C9878E /* explosion.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +153,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */,
 				E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */,
 				E41425521F34733E00E7CCAF /* GameScene.sks in Resources */,
+				E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */,
 				E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */,
 				E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */,
 				E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */,
