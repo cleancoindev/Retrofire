@@ -16,6 +16,11 @@
 		E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E414255C1F34733E00E7CCAF /* Assets.xcassets */; };
 		E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */; };
 		E414256C1F347CD600E7CCAF /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E414256B1F347CD600E7CCAF /* Explosion.sks */; };
+		E43E5AD21F39BCC800416DFF /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AD11F39BCC800416DFF /* MenuScene.sks */; };
+		E43E5AD41F39BEDC00416DFF /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E5AD31F39BEDC00416DFF /* MenuScene.swift */; };
+		E43E5AD81F39DC7A00416DFF /* lifelost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */; };
+		E43E5ADC1F39DEC900416DFF /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */; };
+		E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AE31F39F1A500416DFF /* GameOverScene.sks */; };
 		E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E4BCA6F01F36392C009D0D2E /* Sand.sks */; };
 		E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B201F3726EB00C9878E /* bullet.mp3 */; };
 		E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B211F3726EB00C9878E /* explosion.mp3 */; };
@@ -33,6 +38,11 @@
 		E414255F1F34733E00E7CCAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E41425611F34733E00E7CCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E414256B1F347CD600E7CCAF /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
+		E43E5AD11F39BCC800416DFF /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
+		E43E5AD31F39BEDC00416DFF /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lifelost.mp3; sourceTree = "<group>"; };
+		E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		E43E5AE31F39F1A500416DFF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		E4BCA6F01F36392C009D0D2E /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sand.sks; sourceTree = "<group>"; };
 		E4FF4B201F3726EB00C9878E /* bullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullet.mp3; sourceTree = "<group>"; };
 		E4FF4B211F3726EB00C9878E /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
@@ -68,20 +78,64 @@
 		E414254E1F34733E00E7CCAF /* Retrofire */ = {
 			isa = PBXGroup;
 			children = (
-				E41425551F34733E00E7CCAF /* GameScene.swift */,
-				E41425571F34733E00E7CCAF /* GameViewController.swift */,
-				E414254F1F34733E00E7CCAF /* AppDelegate.swift */,
-				E41425511F34733E00E7CCAF /* GameScene.sks */,
-				E41425531F34733E00E7CCAF /* Actions.sks */,
-				E414256B1F347CD600E7CCAF /* Explosion.sks */,
-				E4BCA6F01F36392C009D0D2E /* Sand.sks */,
-				E41425591F34733E00E7CCAF /* Main.storyboard */,
-				E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */,
-				E41425611F34733E00E7CCAF /* Info.plist */,
-				E414255C1F34733E00E7CCAF /* Assets.xcassets */,
+				E43E5ADD1F39E29700416DFF /* Game */,
+				E43E5ADF1F39E2AF00416DFF /* Menu */,
+				E43E5AE01F39E2BB00416DFF /* Game Over */,
+				E43E5AE11F39E2E900416DFF /* Effects */,
 				E4FF4B1F1F3726EB00C9878E /* Sounds */,
+				E43E5AE21F39E32400416DFF /* Controllers */,
+				E414255C1F34733E00E7CCAF /* Assets.xcassets */,
+				E41425611F34733E00E7CCAF /* Info.plist */,
 			);
 			path = Retrofire;
+			sourceTree = "<group>";
+		};
+		E43E5ADD1F39E29700416DFF /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				E41425551F34733E00E7CCAF /* GameScene.swift */,
+				E41425511F34733E00E7CCAF /* GameScene.sks */,
+			);
+			name = Game;
+			sourceTree = "<group>";
+		};
+		E43E5ADF1F39E2AF00416DFF /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				E43E5AD31F39BEDC00416DFF /* MenuScene.swift */,
+				E43E5AD11F39BCC800416DFF /* MenuScene.sks */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		E43E5AE01F39E2BB00416DFF /* Game Over */ = {
+			isa = PBXGroup;
+			children = (
+				E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */,
+				E43E5AE31F39F1A500416DFF /* GameOverScene.sks */,
+			);
+			name = "Game Over";
+			sourceTree = "<group>";
+		};
+		E43E5AE11F39E2E900416DFF /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				E4BCA6F01F36392C009D0D2E /* Sand.sks */,
+				E414256B1F347CD600E7CCAF /* Explosion.sks */,
+			);
+			name = Effects;
+			sourceTree = "<group>";
+		};
+		E43E5AE21F39E32400416DFF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E41425571F34733E00E7CCAF /* GameViewController.swift */,
+				E414254F1F34733E00E7CCAF /* AppDelegate.swift */,
+				E41425531F34733E00E7CCAF /* Actions.sks */,
+				E41425591F34733E00E7CCAF /* Main.storyboard */,
+				E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		E4FF4B1F1F3726EB00C9878E /* Sounds */ = {
@@ -89,6 +143,7 @@
 			children = (
 				E4FF4B201F3726EB00C9878E /* bullet.mp3 */,
 				E4FF4B211F3726EB00C9878E /* explosion.mp3 */,
+				E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -154,8 +209,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */,
+				E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */,
+				E43E5AD81F39DC7A00416DFF /* lifelost.mp3 in Resources */,
 				E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */,
 				E41425521F34733E00E7CCAF /* GameScene.sks in Resources */,
+				E43E5AD21F39BCC800416DFF /* MenuScene.sks in Resources */,
 				E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */,
 				E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */,
 				E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */,
@@ -172,7 +230,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E43E5ADC1F39DEC900416DFF /* GameOverScene.swift in Sources */,
 				E41425561F34733E00E7CCAF /* GameScene.swift in Sources */,
+				E43E5AD41F39BEDC00416DFF /* MenuScene.swift in Sources */,
 				E41425581F34733E00E7CCAF /* GameViewController.swift in Sources */,
 				E41425501F34733E00E7CCAF /* AppDelegate.swift in Sources */,
 			);

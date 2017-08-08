@@ -29,7 +29,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let motionManger = CMMotionManager()
     var xAcceleration:CGFloat = 0
     
+    var livesArray:[SKSpriteNode]!
+    
     override func didMove(to view: SKView) {
+        
+        self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
+        
+        addLives()
         
         sand = SKEmitterNode(fileNamed: "Sand")
         sand.position = CGPoint(x: self.size.width / 2, y: self.size.height)
@@ -46,19 +52,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(player)
         
+        player.zPosition = 1
+        
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsWorld.contactDelegate = self
         
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: 100, y: self.size.height - 60)
+        scoreLabel.position = CGPoint(x: 0.175 * self.size.width, y: self.size.height - 72)
         scoreLabel.fontName = "AmericanTypewriter-Bold"
-        scoreLabel.fontSize = 36
+        scoreLabel.fontSize = 42
         scoreLabel.fontColor = UIColor.black
         score = 0
         
         self.addChild(scoreLabel)
         
-        gameTimer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
+        scoreLabel.zPosition = 1
+        
+        var timeInterval = 0.75
+        
+        if UserDefaults.standard.bool(forKey: "hard") {
+            timeInterval = 0.3
+        }
+        
+        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
         
         motionManger.accelerometerUpdateInterval = 0.2
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
@@ -66,6 +82,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let acceleration = accelerometerData.acceleration
                 self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
             }
+        }
+        
+    }
+    
+    func addLives() {
+        
+        livesArray = [SKSpriteNode]()
+        
+        for lives in 1 ... 3 {
+            
+            let lifeNode = SKSpriteNode(imageNamed: "heart")
+            
+            lifeNode.texture!.filteringMode = .nearest
+            lifeNode.setScale(8)
+            
+            lifeNode.position = CGPoint(x: self.size.width - 1.1 * CGFloat(4 - lives) * lifeNode.size.width, y: self.size.height - 60)
+            
+            self.addChild(lifeNode)
+            
+            lifeNode.zPosition = 1
+            
+            livesArray.append(lifeNode)
+            
         }
         
     }
@@ -91,6 +130,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let animationDuration:TimeInterval = 10 // 10 matches speed 159.2 at scale 8
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -scenery.size.height), duration: animationDuration))
+        actionArray.append(SKAction.run {
+            self.run(SKAction.playSoundFileNamed("lifelost", waitForCompletion: false))
+            if self.livesArray.count > 0 {
+                let lifeNode = self.livesArray.first
+                lifeNode!.removeFromParent()
+                self.livesArray.removeFirst()
+                if self.livesArray.count == 0 {
+                    let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
+                    transition.pausesOutgoingScene = false
+                    transition.pausesIncomingScene = false
+                    let gameOver = SKScene(fileNamed: "GameOverScene") as! GameOverScene
+                    gameOver.score = self.score
+                    self.view?.presentScene(gameOver, transition: transition)
+                }
+            }
+        })
         actionArray.append(SKAction.removeFromParent())
         scenery.run(SKAction.sequence(actionArray))
         
@@ -144,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & sceneryCategory != 0 {
+        if firstBody.node != nil && secondBody.node != nil && firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & sceneryCategory != 0 {
             bulletHitScenery(bulletNode: firstBody.node as! SKSpriteNode, sceneryNode: secondBody.node as! SKSpriteNode)
         }
         
