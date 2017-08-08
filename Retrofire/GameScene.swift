@@ -21,9 +21,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     var gameTimer:Timer!
-    var sceneryList = ["destructible-1", "destructible-2", "destructible-3", "destructible-4", "destructible-5", "destructible-6", "indestructible-1", "indestructible-2", "indestructible-3", "indestructible-4"]
+    var enemyList = ["enemy-1", "enemy-2", "enemy-3", "enemy-4", "enemy-5", "enemy-6", "enemy-7", "enemy-8"]
     
-    let sceneryCategory:UInt32 = 0x1 << 1
+    let enemyCategory:UInt32 = 0x1 << 1
     let bulletCategory:UInt32 = 0x1 << 0
     
     let motionManger = CMMotionManager()
@@ -39,7 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sand = SKEmitterNode(fileNamed: "Sand")
         sand.position = CGPoint(x: self.size.width / 2, y: self.size.height)
-        sand.advanceSimulationTime(10)
+        sand.advanceSimulationTime(25)
         
         self.addChild(sand)
         
@@ -48,19 +48,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = SKSpriteNode(imageNamed: "player-green")
         player.position = CGPoint(x: self.size.width / 2, y: 0.1 * self.size.height)
         player.texture!.filteringMode = .nearest
-        player.setScale(8)
+        player.setScale(5)
         
         self.addChild(player)
-        
-        player.zPosition = 1
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsWorld.contactDelegate = self
         
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: 0.175 * self.size.width, y: self.size.height - 72)
+        scoreLabel.position = CGPoint(x: 0.2 * self.size.width, y: 0.94 * self.size.height)
         scoreLabel.fontName = "AmericanTypewriter-Bold"
-        scoreLabel.fontSize = 42
+        scoreLabel.fontSize = 28
         scoreLabel.fontColor = UIColor.black
         score = 0
         
@@ -74,7 +72,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             timeInterval = 0.3
         }
         
-        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
+        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
         
         motionManger.accelerometerUpdateInterval = 0.2
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
@@ -95,9 +93,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let lifeNode = SKSpriteNode(imageNamed: "heart")
             
             lifeNode.texture!.filteringMode = .nearest
-            lifeNode.setScale(8)
+            lifeNode.setScale(5)
             
-            lifeNode.position = CGPoint(x: self.size.width - 1.1 * CGFloat(4 - lives) * lifeNode.size.width, y: self.size.height - 60)
+            lifeNode.position = CGPoint(x: self.size.width - 1.1 * CGFloat(4 - lives) * lifeNode.size.width, y: 0.95 * self.size.height)
             
             self.addChild(lifeNode)
             
@@ -109,27 +107,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func addScenery () {
+    func addEnemy() {
         
-        sceneryList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: sceneryList) as! [String]
-        let scenery = SKSpriteNode(imageNamed: sceneryList[0])
-        let generateSceneryPosition = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.size.width))
-        let position = CGFloat(generateSceneryPosition.nextInt())
+        enemyList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: enemyList) as! [String]
+        let enemy = SKSpriteNode(imageNamed: enemyList[0])
+        let generateEnemyPosition = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.size.width))
+        let position = CGFloat(generateEnemyPosition.nextInt())
         
-        scenery.position = CGPoint(x: position, y: self.size.height + 8 * scenery.size.height) // Multiplier must match scenery.setScale below
-        scenery.physicsBody = SKPhysicsBody(rectangleOf: scenery.size)
-        scenery.physicsBody?.isDynamic = true
-        scenery.physicsBody?.categoryBitMask = sceneryCategory
-        scenery.physicsBody?.contactTestBitMask = bulletCategory
-        scenery.physicsBody?.collisionBitMask = 0
-        scenery.texture!.filteringMode = .nearest
-        scenery.setScale(8)
+        enemy.position = CGPoint(x: position, y: self.size.height + 5 * enemy.size.height) // Multiplier must match enemy.setScale below
+        enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
+        enemy.physicsBody?.isDynamic = true
+        enemy.physicsBody?.categoryBitMask = enemyCategory
+        enemy.physicsBody?.contactTestBitMask = bulletCategory
+        enemy.physicsBody?.collisionBitMask = 0
+        enemy.texture!.filteringMode = .nearest
+        enemy.setScale(5)
         
-        self.addChild(scenery)
+        self.addChild(enemy)
         
-        let animationDuration:TimeInterval = 10 // 10 matches speed 159.2 at scale 8
+        let animationDuration:TimeInterval = 7 // Match Sand.sks speed if using scenery
         var actionArray = [SKAction]()
-        actionArray.append(SKAction.move(to: CGPoint(x: position, y: -scenery.size.height), duration: animationDuration))
+        actionArray.append(SKAction.move(to: CGPoint(x: position, y: -enemy.size.height), duration: animationDuration))
         actionArray.append(SKAction.run {
             self.run(SKAction.playSoundFileNamed("lifelost", waitForCompletion: false))
             if self.livesArray.count > 0 {
@@ -147,7 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         })
         actionArray.append(SKAction.removeFromParent())
-        scenery.run(SKAction.sequence(actionArray))
+        enemy.run(SKAction.sequence(actionArray))
         
     }
     
@@ -168,11 +166,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletNode.physicsBody = SKPhysicsBody(rectangleOf: bulletNode.size)
         bulletNode.physicsBody?.isDynamic = true
         bulletNode.physicsBody?.categoryBitMask = bulletCategory
-        bulletNode.physicsBody?.contactTestBitMask = sceneryCategory
+        bulletNode.physicsBody?.contactTestBitMask = enemyCategory
         bulletNode.physicsBody?.collisionBitMask = 0
         bulletNode.physicsBody?.usesPreciseCollisionDetection = true
         bulletNode.texture!.filteringMode = .nearest // Remove line if keeping art a uniform colour rectangle
-        bulletNode.setScale(8)
+        bulletNode.setScale(5)
         
         self.addChild(bulletNode)
         
@@ -199,25 +197,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node != nil && secondBody.node != nil && firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & sceneryCategory != 0 {
-            bulletHitScenery(bulletNode: firstBody.node as! SKSpriteNode, sceneryNode: secondBody.node as! SKSpriteNode)
+        if firstBody.node != nil && secondBody.node != nil && firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & enemyCategory != 0 {
+            bulletHitEnemy(bulletNode: firstBody.node as! SKSpriteNode, enemyNode: secondBody.node as! SKSpriteNode)
         }
         
     }
     
     
-    func bulletHitScenery (bulletNode:SKSpriteNode, sceneryNode:SKSpriteNode) {
+    func bulletHitEnemy(bulletNode:SKSpriteNode, enemyNode:SKSpriteNode) {
         
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         
-        explosion.position = sceneryNode.position
+        explosion.position = enemyNode.position
         
         self.addChild(explosion)
         
         self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
         
         bulletNode.removeFromParent()
-        sceneryNode.removeFromParent()
+        enemyNode.removeFromParent()
         
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()

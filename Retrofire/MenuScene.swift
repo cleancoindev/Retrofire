@@ -20,7 +20,7 @@ class MenuScene: SKScene {
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
-        sand.advanceSimulationTime(10)
+        sand.advanceSimulationTime(25)
         
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
@@ -68,7 +68,7 @@ class MenuScene: SKScene {
         }
         else {
             difficultyLabelNode.text = "Easy"
-            userDefaults.set(true, forKey: "hard")
+            userDefaults.set(false, forKey: "hard")
         }
         
         userDefaults.synchronize()

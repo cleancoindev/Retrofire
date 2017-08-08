@@ -20,7 +20,7 @@ class GameOverScene: SKScene {
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
-        sand.advanceSimulationTime(10)
+        sand.advanceSimulationTime(25)
         
         scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text = "\(score)"
