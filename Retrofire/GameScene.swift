@@ -56,7 +56,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: 0.2 * self.size.width, y: 0.94 * self.size.height)
+        scoreLabel.position = CGPoint(x: 0.225 * self.size.width, y: 0.935 * self.size.height)
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         scoreLabel.fontSize = 28
         scoreLabel.fontColor = UIColor.black
