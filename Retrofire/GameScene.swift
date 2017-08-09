@@ -45,10 +45,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sand.zPosition = -1
         
-        player = SKSpriteNode(imageNamed: "player-green")
+        player = SKSpriteNode(imageNamed: "player-1")
         player.position = CGPoint(x: self.size.width / 2, y: 0.1 * self.size.height)
         player.texture!.filteringMode = .nearest
-        player.setScale(5)
+        player.setScale(2.5)
         
         self.addChild(player)
         
