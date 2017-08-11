@@ -114,14 +114,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let generateEnemyPosition = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.size.width))
         let position = CGFloat(generateEnemyPosition.nextInt())
         
-        enemy.position = CGPoint(x: position, y: self.size.height + 5 * enemy.size.height) // Multiplier must match enemy.setScale below
+        enemy.position = CGPoint(x: position, y: self.size.height + 2.5 * enemy.size.height) // Multiplier must match enemy.setScale below
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
         enemy.physicsBody?.isDynamic = true
         enemy.physicsBody?.categoryBitMask = enemyCategory
         enemy.physicsBody?.contactTestBitMask = bulletCategory
         enemy.physicsBody?.collisionBitMask = 0
         enemy.texture!.filteringMode = .nearest
-        enemy.setScale(5)
+        enemy.setScale(2.5)
         
         self.addChild(enemy)
         
