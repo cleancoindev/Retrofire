@@ -64,7 +64,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scoreLabel)
         
-        scoreLabel.zPosition = 1
+        scoreLabel.zPosition = 2
         
         var timeInterval = 0.75
         
@@ -99,7 +99,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.addChild(lifeNode)
             
-            lifeNode.zPosition = 1
+            lifeNode.zPosition = 2
             
             livesArray.append(lifeNode)
             
@@ -124,6 +124,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.setScale(2.5)
         
         self.addChild(enemy)
+        
+        enemy.zPosition = 1
         
         let animationDuration:TimeInterval = 7 // Match Sand.sks speed if using scenery
         var actionArray = [SKAction]()
