@@ -16,7 +16,7 @@ class MenuScene: SKScene {
     var titleNode:SKSpriteNode!
     var newGameButtonNode:SKSpriteNode!
     var difficultyButtonNode:SKSpriteNode!
-    var difficultyLabelNode:SKLabelNode!
+    var difficultyLabelNode:SKSpriteNode!
     
     override func didMove(to view: SKView) {
         
@@ -34,14 +34,18 @@ class MenuScene: SKScene {
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
         difficultyButtonNode.texture = SKTexture(imageNamed: "difficultyButton")
         difficultyButtonNode.texture!.filteringMode = .nearest
-        difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
+        difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKSpriteNode
+        //difficultyLabelNode.texture = SKTexture(imageNamed: "easy")
+        //difficultyLabelNode.texture!.filteringMode = .nearest
         
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "hard") {
-            difficultyLabelNode.text = "Hard"
+            difficultyLabelNode.texture = SKTexture(imageNamed: "hard")
+            difficultyLabelNode.texture!.filteringMode = .nearest
         }
         else {
-            difficultyLabelNode.text = "Easy"
+            difficultyLabelNode.texture = SKTexture(imageNamed: "easy")
+            difficultyLabelNode.texture!.filteringMode = .nearest
         }
         
     }
@@ -70,13 +74,15 @@ class MenuScene: SKScene {
         
         let userDefaults = UserDefaults.standard
         
-        if difficultyLabelNode.text == "Easy" {
-            difficultyLabelNode.text = "Hard"
-            userDefaults.set(true, forKey: "hard")
+        if userDefaults.bool(forKey: "hard") {
+            difficultyLabelNode.texture = SKTexture(imageNamed: "easy")
+            difficultyLabelNode.texture!.filteringMode = .nearest
+            userDefaults.set(false, forKey: "hard")
         }
         else {
-            difficultyLabelNode.text = "Easy"
-            userDefaults.set(false, forKey: "hard")
+            difficultyLabelNode.texture = SKTexture(imageNamed: "hard")
+            difficultyLabelNode.texture!.filteringMode = .nearest
+            userDefaults.set(true, forKey: "hard")
         }
         
         userDefaults.synchronize()
