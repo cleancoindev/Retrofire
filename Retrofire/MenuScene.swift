@@ -13,6 +13,7 @@ import SpriteKit
 class MenuScene: SKScene {
     
     var sand:SKEmitterNode!
+    var titleNode:SKSpriteNode!
     var newGameButtonNode:SKSpriteNode!
     var difficultyButtonNode:SKSpriteNode!
     var difficultyLabelNode:SKLabelNode!
@@ -24,10 +25,15 @@ class MenuScene: SKScene {
         sand = self.childNode(withName: "sand") as! SKEmitterNode
         sand.advanceSimulationTime(25)
         
+        titleNode = self.childNode(withName: "title") as! SKSpriteNode
+        titleNode.texture = SKTexture(imageNamed: "title")
+        titleNode.texture!.filteringMode = .nearest
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
+        newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
+        newGameButtonNode.texture!.filteringMode = .nearest
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
-        
         difficultyButtonNode.texture = SKTexture(imageNamed: "difficultyButton")
+        difficultyButtonNode.texture!.filteringMode = .nearest
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKLabelNode
         
         let userDefaults = UserDefaults.standard

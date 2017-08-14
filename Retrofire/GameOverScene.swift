@@ -29,6 +29,7 @@ class GameOverScene: SKScene {
         
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
+        newGameButtonNode.texture!.filteringMode = .nearest
         
     }
     
