@@ -6,7 +6,7 @@
 //  Copyright © 2017 Turner Dhir LLP. All rights reserved.
 //
 
-// FOR SCALING: DEFINE POSITIONS OF ITEMS BY CODE IN TERMS OF SCREEN PROPORTIONS
+// FOR SCALING: DEFINE POSITIONS OF ITEMS BY CODE IN TERMS OF SCREEN PROPORTIONS, MAKE SURE FITS ON SMALL SCREENS
 
 import SpriteKit
 
@@ -28,15 +28,17 @@ class MenuScene: SKScene {
         titleNode = self.childNode(withName: "title") as! SKSpriteNode
         titleNode.texture = SKTexture(imageNamed: "title")
         titleNode.texture!.filteringMode = .nearest
+        titleNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.8 * self.size.height)
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
+        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.585 * self.size.height)
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
         difficultyButtonNode.texture = SKTexture(imageNamed: "difficultyButton")
         difficultyButtonNode.texture!.filteringMode = .nearest
+        difficultyButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.485 * self.size.height)
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKSpriteNode
-        //difficultyLabelNode.texture = SKTexture(imageNamed: "easy")
-        //difficultyLabelNode.texture!.filteringMode = .nearest
+        difficultyLabelNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.4 * self.size.height)
         
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "hard") {
