@@ -6,15 +6,17 @@
 //  Copyright © 2017 Turner Dhir LLP. All rights reserved.
 //
 
-// FOR SCALING: DEFINE POSITIONS OF ITEMS BY CODE IN TERMS OF SCREEN PROPORTIONS, MAKE SURE FITS ON SMALL SCREENS
+// FOR SCALING: DEFINE SIZE OF ITEMS BY CODE IN TERMS OF SCREEN PROPORTIONS
 
 import SpriteKit
 
 class GameOverScene: SKScene {
     
     var sand:SKEmitterNode!
-    var score:Int = 0
+    var gameOver:SKSpriteNode!
+    var scoreText:SKSpriteNode!
     var scoreLabel:SKLabelNode!
+    var score:Int = 0
     var newGameButtonNode:SKSpriteNode!
     
     override func didMove(to view:SKView) {
@@ -24,12 +26,21 @@ class GameOverScene: SKScene {
         sand = self.childNode(withName: "sand") as! SKEmitterNode
         sand.advanceSimulationTime(25)
         
+        gameOver = self.childNode(withName: "gameOver") as! SKSpriteNode
+        gameOver.texture = SKTexture(imageNamed: "gameOver")
+        gameOver.texture!.filteringMode = .nearest
+        gameOver.position = CGPoint(x: 0.5 * self.size.width, y: 0.8 * self.size.height)
+        scoreText = self.childNode(withName: "scoreText") as! SKSpriteNode
+        scoreText.texture = SKTexture(imageNamed: "scoreText")
+        scoreText.texture!.filteringMode = .nearest
+        scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.625 * self.size.height)
         scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text = "\(score)"
-        
+        scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.54 * self.size.height)
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
+        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.415 * self.size.height)
         
     }
     
