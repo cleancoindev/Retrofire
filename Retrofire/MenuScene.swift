@@ -23,22 +23,26 @@ class MenuScene: SKScene {
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
+        sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
         sand.advanceSimulationTime(25)
-        
         titleNode = self.childNode(withName: "title") as! SKSpriteNode
         titleNode.texture = SKTexture(imageNamed: "title")
         titleNode.texture!.filteringMode = .nearest
         titleNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.8 * self.size.height)
+        titleNode.size = CGSize(width: 0.8 * self.size.width, height: 0.0625 * self.size.width )
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
         newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.585 * self.size.height)
+        newGameButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
         difficultyButtonNode.texture = SKTexture(imageNamed: "difficultyButton")
         difficultyButtonNode.texture!.filteringMode = .nearest
         difficultyButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.485 * self.size.height)
+        difficultyButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKSpriteNode
         difficultyLabelNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.4 * self.size.height)
+        difficultyLabelNode.size = CGSize(width: 0.2875 * self.size.width, height: 0.0625 * self.size.width)
         
         let userDefaults = UserDefaults.standard
         if userDefaults.bool(forKey: "hard") {

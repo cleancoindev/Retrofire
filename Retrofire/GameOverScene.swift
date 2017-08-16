@@ -24,16 +24,18 @@ class GameOverScene: SKScene {
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
+        sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
         sand.advanceSimulationTime(25)
-        
         gameOver = self.childNode(withName: "gameOver") as! SKSpriteNode
         gameOver.texture = SKTexture(imageNamed: "gameOver")
         gameOver.texture!.filteringMode = .nearest
         gameOver.position = CGPoint(x: 0.5 * self.size.width, y: 0.8 * self.size.height)
+        gameOver.size = CGSize(width: 0.8 * self.size.width, height: 0.0625 * self.size.width)
         scoreText = self.childNode(withName: "scoreText") as! SKSpriteNode
         scoreText.texture = SKTexture(imageNamed: "scoreText")
         scoreText.texture!.filteringMode = .nearest
         scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.625 * self.size.height)
+        scoreText.size = CGSize(width: 0.3625 * self.size.width, height: 0.0625 * self.size.width)
         scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text = "\(score)"
         scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.54 * self.size.height)
@@ -41,6 +43,7 @@ class GameOverScene: SKScene {
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
         newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.415 * self.size.height)
+        newGameButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         
     }
     
