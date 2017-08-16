@@ -33,6 +33,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
         addLives()

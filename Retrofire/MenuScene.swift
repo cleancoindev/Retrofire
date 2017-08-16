@@ -6,8 +6,6 @@
 //  Copyright © 2017 Turner Dhir LLP. All rights reserved.
 //
 
-// FOR SCALING: DEFINE SIZE OF ITEMS BY CODE IN TERMS OF SCREEN PROPORTIONS
-
 import SpriteKit
 
 class MenuScene: SKScene {
