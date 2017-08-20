@@ -24,7 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameTimer:Timer!
     var bossTimer:Timer!
     var enemyList = ["enemy-1", "enemy-2", "enemy-3", "enemy-4", "enemy-5", "enemy-6", "enemy-7", "enemy-8"]
-    var bossList = ["enemy-1", "enemy-2"]
+    var bossList = ["boss-1", "boss-2"]
     
     let enemyCategory:UInt32 = 0x1 << 1
     let bossCategory:UInt32 = 0x1 << 2
@@ -148,14 +148,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bossLives = 10
         bossList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: bossList) as! [String]
         let boss = SKSpriteNode(imageNamed: bossList[0])
-        boss.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height + 2.5 * boss.size.height) // Multiplier must match boss.setScale below
+        boss.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height + 5 * boss.size.height) // Multiplier must match boss.setScale below
         boss.physicsBody = SKPhysicsBody(rectangleOf: boss.size)
         boss.physicsBody?.isDynamic = true
         boss.physicsBody?.categoryBitMask = bossCategory
         boss.physicsBody?.contactTestBitMask = bulletCategory
         boss.physicsBody?.collisionBitMask = 0
         boss.texture!.filteringMode = .nearest
-        boss.setScale(2.5)
+        boss.setScale(5)
         
         self.addChild(boss)
         
