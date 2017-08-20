@@ -20,10 +20,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             scoreLabel.text = "Score: \(score)"
         }
     }
+    var bossLives:Int = 0
     var gameTimer:Timer!
+    var bossTimer:Timer!
     var enemyList = ["enemy-1", "enemy-2", "enemy-3", "enemy-4", "enemy-5", "enemy-6", "enemy-7", "enemy-8"]
+    var bossList = ["enemy-1", "enemy-2"]
     
     let enemyCategory:UInt32 = 0x1 << 1
+    let bossCategory:UInt32 = 0x1 << 2
     let bulletCategory:UInt32 = 0x1 << 0
     
     let motionManger = CMMotionManager()
@@ -40,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addLives()
         
         sand = SKEmitterNode(fileNamed: "Sand")
-        sand.position = CGPoint(x: self.size.width / 2, y: self.size.height)
+        sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
         sand.advanceSimulationTime(25)
         
         self.addChild(sand)
@@ -48,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sand.zPosition = -1
         
         player = SKSpriteNode(imageNamed: "player-1")
-        player.position = CGPoint(x: self.size.width / 2, y: 0.1 * self.size.height)
+        player.position = CGPoint(x: 0.5 * self.size.width, y: 0.1 * self.size.height)
         player.texture!.filteringMode = .nearest
         player.setScale(2.5)
         
@@ -66,7 +70,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scoreLabel)
         
-        scoreLabel.zPosition = 2
+        scoreLabel.zPosition = 4
         
         var timeInterval = 0.75
         
@@ -75,6 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
+        bossTimer = Timer.scheduledTimer(timeInterval: 20 * timeInterval, target: self, selector: #selector(addBoss), userInfo: nil, repeats: true)
         
         motionManger.accelerometerUpdateInterval = 0.2
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
@@ -101,7 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             self.addChild(lifeNode)
             
-            lifeNode.zPosition = 2
+            lifeNode.zPosition = 4
             
             livesArray.append(lifeNode)
             
@@ -129,27 +134,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         enemy.zPosition = 1
         
-        let animationDuration:TimeInterval = 7 // Match Sand.sks speed if using scenery
+        let animationDuration:TimeInterval = 7
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -enemy.size.height), duration: animationDuration))
-        actionArray.append(SKAction.run {
-            self.run(SKAction.playSoundFileNamed("lifelost", waitForCompletion: false))
-            if self.livesArray.count > 0 {
-                let lifeNode = self.livesArray.first
-                lifeNode!.removeFromParent()
-                self.livesArray.removeFirst()
-                if self.livesArray.count == 0 {
-                    let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
-                    transition.pausesOutgoingScene = false
-                    transition.pausesIncomingScene = false
-                    let gameOver = SKScene(fileNamed: "GameOverScene") as! GameOverScene
-                    gameOver.score = self.score
-                    self.view?.presentScene(gameOver, transition: transition)
-                }
-            }
-        })
+        actionArray.append(SKAction.run(lifeLost))
         actionArray.append(SKAction.removeFromParent())
         enemy.run(SKAction.sequence(actionArray))
+        
+    }
+    
+    func addBoss() {
+        
+        bossLives = 10
+        bossList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: bossList) as! [String]
+        let boss = SKSpriteNode(imageNamed: bossList[0])
+        boss.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height + 2.5 * boss.size.height) // Multiplier must match boss.setScale below
+        boss.physicsBody = SKPhysicsBody(rectangleOf: boss.size)
+        boss.physicsBody?.isDynamic = true
+        boss.physicsBody?.categoryBitMask = bossCategory
+        boss.physicsBody?.contactTestBitMask = bulletCategory
+        boss.physicsBody?.collisionBitMask = 0
+        boss.texture!.filteringMode = .nearest
+        boss.setScale(2.5)
+        
+        self.addChild(boss)
+        
+        boss.zPosition = 2
+        
+        let animationDuration:TimeInterval = 14
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.move(to: CGPoint(x: 0.5 * self.size.width, y: -boss.size.height), duration: animationDuration))
+        actionArray.append(SKAction.run(lifeLost))
+        actionArray.append(SKAction.removeFromParent())
+        boss.run(SKAction.sequence(actionArray))
         
     }
     
@@ -166,7 +183,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bulletNode = SKSpriteNode(imageNamed: "bullet")
         
         bulletNode.position = player.position
-        bulletNode.position.y += player.size.height / 2
+        bulletNode.position.y += 0.5 * player.size.height
         bulletNode.physicsBody = SKPhysicsBody(rectangleOf: bulletNode.size)
         bulletNode.physicsBody?.isDynamic = true
         bulletNode.physicsBody?.categoryBitMask = bulletCategory
@@ -201,8 +218,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node != nil && secondBody.node != nil && firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & enemyCategory != 0 {
-            bulletHitEnemy(bulletNode: firstBody.node as! SKSpriteNode, enemyNode: secondBody.node as! SKSpriteNode)
+        if firstBody.node != nil && secondBody.node != nil {
+            if firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & enemyCategory != 0 {
+                bulletHitEnemy(bulletNode: firstBody.node as! SKSpriteNode, enemyNode: secondBody.node as! SKSpriteNode)
+            }
+            else if firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & bossCategory != 0 {
+                bulletHitBoss(bulletNode: firstBody.node as! SKSpriteNode, bossNode: secondBody.node as! SKSpriteNode)
+            }
         }
         
     }
@@ -227,6 +249,50 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         score += 5
         
+    }
+    
+    func bulletHitBoss(bulletNode:SKSpriteNode, bossNode:SKSpriteNode) {
+        
+        let explosion = SKEmitterNode(fileNamed: "Explosion")!
+        
+        explosion.position = bulletNode.position
+        explosion.zPosition = 3
+        
+        self.addChild(explosion)
+        
+        self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
+        
+        bulletNode.removeFromParent()
+        if bossLives < 2 {
+            bossNode.removeFromParent()
+        }
+        else {
+            bossLives -= 1
+        }
+        
+        self.run(SKAction.wait(forDuration: 2)) {
+            explosion.removeFromParent()
+        }
+        
+        score += 100
+        
+    }
+    
+    func lifeLost() {
+        self.run(SKAction.playSoundFileNamed("lifelost", waitForCompletion: false))
+        if self.livesArray.count > 0 {
+            let lifeNode = self.livesArray.first
+            lifeNode!.removeFromParent()
+            self.livesArray.removeFirst()
+            if self.livesArray.count == 0 {
+                let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
+                transition.pausesOutgoingScene = false
+                transition.pausesIncomingScene = false
+                let gameOver = SKScene(fileNamed: "GameOverScene") as! GameOverScene
+                gameOver.score = self.score
+                self.view?.presentScene(gameOver, transition: transition)
+            }
+        }
     }
     
     override func didSimulatePhysics() {
