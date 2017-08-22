@@ -180,26 +180,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.run(SKAction.playSoundFileNamed("bullet", waitForCompletion: false))
         
-        let bulletNode = SKSpriteNode(imageNamed: "bullet")
+        let bullet = SKSpriteNode(imageNamed: "bullet")
         
-        bulletNode.position = player.position
-        bulletNode.position.y += 0.5 * player.size.height
-        bulletNode.physicsBody = SKPhysicsBody(rectangleOf: bulletNode.size)
-        bulletNode.physicsBody?.isDynamic = true
-        bulletNode.physicsBody?.categoryBitMask = bulletCategory
-        bulletNode.physicsBody?.contactTestBitMask = enemyCategory
-        bulletNode.physicsBody?.collisionBitMask = 0
-        bulletNode.physicsBody?.usesPreciseCollisionDetection = true
-        bulletNode.texture!.filteringMode = .nearest // Remove line if keeping art a uniform colour rectangle
-        bulletNode.setScale(5)
+        bullet.position = player.position
+        bullet.position.y += 0.5 * player.size.height
+        bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size)
+        bullet.physicsBody?.isDynamic = true
+        bullet.physicsBody?.categoryBitMask = bulletCategory
+        bullet.physicsBody?.contactTestBitMask = enemyCategory
+        bullet.physicsBody?.collisionBitMask = 0
+        bullet.physicsBody?.usesPreciseCollisionDetection = true
+        bullet.texture!.filteringMode = .nearest // Remove line if keeping art a uniform colour rectangle
+        bullet.setScale(5)
         
-        self.addChild(bulletNode)
+        self.addChild(bullet)
         
         let animationDuration:TimeInterval = 0.3
         var actionArray = [SKAction]()
-        actionArray.append(SKAction.move(to: CGPoint(x: player.position.x, y: self.size.height + bulletNode.size.height), duration: animationDuration))
+        actionArray.append(SKAction.move(to: CGPoint(x: player.position.x, y: self.size.height + bullet.size.height), duration: animationDuration))
         actionArray.append(SKAction.removeFromParent())
-        bulletNode.run(SKAction.sequence(actionArray))
+        bullet.run(SKAction.sequence(actionArray))
         
     }
     
