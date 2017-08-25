@@ -21,14 +21,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     var bossLives:Int = 0
-    var gameTimer:Timer!
+    
+    var enemyTimer:Timer!
+    var sceneryTimer:Timer!
     var bossTimer:Timer!
+    
     var enemyList = ["enemy-1", "enemy-2", "enemy-3", "enemy-4", "enemy-5", "enemy-6", "enemy-7", "enemy-8"]
+    var sceneryList = ["scenery-1", "scenery-2", "scenery-3", "scenery-4", "scenery-5", "scenery-6", "scenery-7", "scenery-8", "scenery-9", "scenery-10"]
     var bossList = ["boss-1", "boss-2"]
     
+    let bulletCategory:UInt32 = 0x1 << 0
     let enemyCategory:UInt32 = 0x1 << 1
     let bossCategory:UInt32 = 0x1 << 2
-    let bulletCategory:UInt32 = 0x1 << 0
+    let playerCategory:UInt32 = 0x1 << 3
+    let sceneryCategory:UInt32 = 0x1 << 4
     
     let motionManger = CMMotionManager()
     var xAcceleration:CGFloat = 0
@@ -53,6 +59,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         player = SKSpriteNode(imageNamed: "player-1")
         player.position = CGPoint(x: 0.5 * self.size.width, y: 0.1 * self.size.height)
+        player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
+        player.physicsBody?.isDynamic = true
+        player.physicsBody?.categoryBitMask = playerCategory
+        player.physicsBody?.contactTestBitMask = sceneryCategory
+        player.physicsBody?.collisionBitMask = 0
         player.texture!.filteringMode = .nearest
         player.setScale(2.5)
         
@@ -72,14 +83,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scoreLabel.zPosition = 4
         
-        var timeInterval = 0.75
+        var timeInterval = 1.25
         
         if UserDefaults.standard.bool(forKey: "hard") {
-            timeInterval = 0.3
+            timeInterval = 0.75
         }
         
-        gameTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
-        bossTimer = Timer.scheduledTimer(timeInterval: 20 * timeInterval, target: self, selector: #selector(addBoss), userInfo: nil, repeats: true)
+        enemyTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
+        sceneryTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
+        bossTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(addBoss), userInfo: nil, repeats: true)
         
         motionManger.accelerometerUpdateInterval = 0.2
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
@@ -143,6 +155,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func addScenery() {
+        
+        sceneryList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: sceneryList) as! [String]
+        let scenery = SKSpriteNode(imageNamed: sceneryList[0])
+        let generateSceneryPosition = GKRandomDistribution(lowestValue: 0, highestValue: Int(self.size.width))
+        let position = CGFloat(generateSceneryPosition.nextInt())
+        
+        scenery.position = CGPoint(x: position, y: self.size.height + 2.5 * scenery.size.height) // Multiplier must match scenery.setScale below
+        scenery.physicsBody = SKPhysicsBody(rectangleOf: scenery.size)
+        scenery.physicsBody?.isDynamic = true
+        scenery.physicsBody?.categoryBitMask = sceneryCategory
+        scenery.physicsBody?.contactTestBitMask = playerCategory
+        scenery.physicsBody?.collisionBitMask = 0
+        scenery.texture!.filteringMode = .nearest
+        scenery.setScale(2.5)
+        
+        self.addChild(scenery)
+        
+        let animationDuration:TimeInterval = 27.2 // Must match Sand.sks speed
+        var actionArray = [SKAction]()
+        actionArray.append(SKAction.move(to: CGPoint(x: position, y: -scenery.size.height), duration: animationDuration))
+        actionArray.append(SKAction.removeFromParent())
+        scenery.run(SKAction.sequence(actionArray))
+        
+    }
+
     func addBoss() {
         
         bossLives = 10
@@ -170,6 +208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         fireBullet()
@@ -187,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody = SKPhysicsBody(rectangleOf: bullet.size)
         bullet.physicsBody?.isDynamic = true
         bullet.physicsBody?.categoryBitMask = bulletCategory
-        bullet.physicsBody?.contactTestBitMask = enemyCategory
+        bullet.physicsBody?.contactTestBitMask = enemyCategory | bossCategory
         bullet.physicsBody?.collisionBitMask = 0
         bullet.physicsBody?.usesPreciseCollisionDetection = true
         bullet.texture!.filteringMode = .nearest // Remove line if keeping art a uniform colour rectangle
@@ -202,7 +241,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.run(SKAction.sequence(actionArray))
         
     }
-    
     
     func didBegin(_ contact: SKPhysicsContact) {
         
@@ -225,10 +263,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             else if firstBody.categoryBitMask & bulletCategory != 0 && secondBody.categoryBitMask & bossCategory != 0 {
                 bulletHitBoss(bulletNode: firstBody.node as! SKSpriteNode, bossNode: secondBody.node as! SKSpriteNode)
             }
+            else if firstBody.categoryBitMask & playerCategory != 0 && secondBody.categoryBitMask & sceneryCategory != 0 {
+                playerHitScenery(playerNode: firstBody.node as! SKSpriteNode, sceneryNode: secondBody.node as! SKSpriteNode)
+            }
         }
         
     }
-    
     
     func bulletHitEnemy(bulletNode:SKSpriteNode, enemyNode:SKSpriteNode) {
         
@@ -275,6 +315,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         score += 100
+        
+    }
+    
+    func playerHitScenery(playerNode:SKSpriteNode, sceneryNode:SKSpriteNode) {
+        
+        let explosion = SKEmitterNode(fileNamed: "Explosion")!
+        
+        explosion.position = sceneryNode.position
+        
+        self.addChild(explosion)
+        
+        self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
+        
+        sceneryNode.removeFromParent()
+        
+        self.run(SKAction.wait(forDuration: 2)) {
+            explosion.removeFromParent()
+        }
+        
+        lifeLost()
         
     }
     
