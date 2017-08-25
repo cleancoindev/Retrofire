@@ -173,7 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(scenery)
         
-        let animationDuration:TimeInterval = 27.2 // Must match Sand.sks speed
+        let animationDuration:TimeInterval = 0.0369 * Double(self.size.height) // Matches Sand.sks speed, defined in terms of screen height for consistency across devices
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: position, y: -scenery.size.height), duration: animationDuration))
         actionArray.append(SKAction.removeFromParent())
