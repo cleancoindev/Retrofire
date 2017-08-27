@@ -14,12 +14,20 @@ class GameOverScene: SKScene {
     var gameOver:SKSpriteNode!
     var scoreText:SKSpriteNode!
     var scoreLabel:SKLabelNode!
+    var highScoreText:SKSpriteNode!
+    var highScoreLabel:SKLabelNode!
     var score:Int = 0
     var newGameButtonNode:SKSpriteNode!
     
     override func didMove(to view:SKView) {
         
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
+        
+        let userDefaults = UserDefaults.standard
+        if userDefaults.integer(forKey: "highScore") < score {
+            userDefaults.set(score, forKey: "highScore")
+        }
+        userDefaults.synchronize()
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
         sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
@@ -32,15 +40,23 @@ class GameOverScene: SKScene {
         scoreText = self.childNode(withName: "scoreText") as! SKSpriteNode
         scoreText.texture = SKTexture(imageNamed: "scoreText")
         scoreText.texture!.filteringMode = .nearest
-        scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.625 * self.size.height)
+        scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.64 * self.size.height)
         scoreText.size = CGSize(width: 0.3625 * self.size.width, height: 0.0625 * self.size.width)
         scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text = "\(score)"
-        scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.54 * self.size.height)
+        scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.56 * self.size.height)
+        highScoreText = self.childNode(withName: "highScoreText") as! SKSpriteNode
+        highScoreText.texture = SKTexture(imageNamed: "highScoreText")
+        highScoreText.texture!.filteringMode = .nearest
+        highScoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.47 * self.size.height)
+        highScoreText.size = CGSize(width: 0.3625 * self.size.width, height: 0.1375 * self.size.width)
+        highScoreLabel = self.childNode(withName: "highScoreLabel") as! SKLabelNode
+        highScoreLabel.text = "\(userDefaults.integer(forKey: "highScore"))"
+        highScoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.37 * self.size.height)
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
-        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.415 * self.size.height)
+        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.23 * self.size.height)
         newGameButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         
     }
