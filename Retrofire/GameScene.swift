@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bossTimer:Timer!
     
     var enemyList = ["enemy-1", "enemy-2", "enemy-3", "enemy-4", "enemy-5", "enemy-6", "enemy-7", "enemy-8"]
-    var sceneryList = ["scenery-1", "scenery-2", "scenery-3", "scenery-4", "scenery-5", "scenery-6", "scenery-7", "scenery-8", "scenery-9", "scenery-10"]
+    var sceneryList = ["scenery-1", "scenery-2", "scenery-3", "scenery-4", "scenery-5", "scenery-6", "scenery-7", "scenery-8"]
     var bossList = ["boss-1", "boss-2"]
     
     let bulletCategory:UInt32 = 0x1 << 0
@@ -90,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         enemyTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
-        sceneryTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
+        sceneryTimer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
         bossTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(addBoss), userInfo: nil, repeats: true)
         
         motionManger.accelerometerUpdateInterval = 0.2
