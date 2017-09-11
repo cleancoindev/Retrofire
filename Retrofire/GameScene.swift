@@ -97,7 +97,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
             if let accelerometerData = data {
                 let acceleration = accelerometerData.acceleration
-                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
+                self.xAcceleration = 0.2 * CGFloat(acceleration.x)
             }
         }
         
@@ -229,7 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody?.contactTestBitMask = enemyCategory | bossCategory
         bullet.physicsBody?.collisionBitMask = 0
         bullet.physicsBody?.usesPreciseCollisionDetection = true
-        bullet.texture!.filteringMode = .nearest // Remove line if keeping art a uniform colour rectangle
+        bullet.texture!.filteringMode = .nearest // Maybe remove line if keeping art a uniform colour rectangle - perhaps this method is actually less resource intensive?
         bullet.setScale(5)
         
         self.addChild(bullet)

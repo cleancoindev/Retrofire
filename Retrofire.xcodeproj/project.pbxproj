@@ -21,6 +21,8 @@
 		E43E5AD81F39DC7A00416DFF /* lifelost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */; };
 		E43E5ADC1F39DEC900416DFF /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */; };
 		E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AE31F39F1A500416DFF /* GameOverScene.sks */; };
+		E48C605F1F66A5C500F4F73B /* ControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C605E1F66A5C500F4F73B /* ControlsScene.swift */; };
+		E48C60611F66A5D100F4F73B /* ControlsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E48C60601F66A5D100F4F73B /* ControlsScene.sks */; };
 		E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E4BCA6F01F36392C009D0D2E /* Sand.sks */; };
 		E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B201F3726EB00C9878E /* bullet.mp3 */; };
 		E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B211F3726EB00C9878E /* explosion.mp3 */; };
@@ -43,6 +45,8 @@
 		E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lifelost.mp3; sourceTree = "<group>"; };
 		E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		E43E5AE31F39F1A500416DFF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		E48C605E1F66A5C500F4F73B /* ControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsScene.swift; sourceTree = "<group>"; };
+		E48C60601F66A5D100F4F73B /* ControlsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ControlsScene.sks; sourceTree = "<group>"; };
 		E4BCA6F01F36392C009D0D2E /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sand.sks; sourceTree = "<group>"; };
 		E4FF4B201F3726EB00C9878E /* bullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullet.mp3; sourceTree = "<group>"; };
 		E4FF4B211F3726EB00C9878E /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
@@ -80,6 +84,7 @@
 			children = (
 				E43E5ADD1F39E29700416DFF /* Game */,
 				E43E5ADF1F39E2AF00416DFF /* Menu */,
+				E48C60531F66A4A000F4F73B /* Controls */,
 				E43E5AE01F39E2BB00416DFF /* Game Over */,
 				E43E5AE11F39E2E900416DFF /* Effects */,
 				E4FF4B1F1F3726EB00C9878E /* Sounds */,
@@ -136,6 +141,15 @@
 				E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E48C60531F66A4A000F4F73B /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				E48C605E1F66A5C500F4F73B /* ControlsScene.swift */,
+				E48C60601F66A5D100F4F73B /* ControlsScene.sks */,
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 		E4FF4B1F1F3726EB00C9878E /* Sounds */ = {
@@ -217,6 +231,7 @@
 				E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */,
 				E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */,
 				E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */,
+				E48C60611F66A5D100F4F73B /* ControlsScene.sks in Resources */,
 				E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */,
 				E41425541F34733E00E7CCAF /* Actions.sks in Resources */,
 				E414256C1F347CD600E7CCAF /* Explosion.sks in Resources */,
@@ -234,6 +249,7 @@
 				E41425561F34733E00E7CCAF /* GameScene.swift in Sources */,
 				E43E5AD41F39BEDC00416DFF /* MenuScene.swift in Sources */,
 				E41425581F34733E00E7CCAF /* GameViewController.swift in Sources */,
+				E48C605F1F66A5C500F4F73B /* ControlsScene.swift in Sources */,
 				E41425501F34733E00E7CCAF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

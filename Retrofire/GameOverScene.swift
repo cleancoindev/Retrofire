@@ -18,6 +18,7 @@ class GameOverScene: SKScene {
     var highScoreLabel:SKLabelNode!
     var score:Int = 0
     var newGameButtonNode:SKSpriteNode!
+    var menuButtonNode:SKSpriteNode!
     
     override func didMove(to view:SKView) {
         
@@ -40,24 +41,29 @@ class GameOverScene: SKScene {
         scoreText = self.childNode(withName: "scoreText") as! SKSpriteNode
         scoreText.texture = SKTexture(imageNamed: "scoreText")
         scoreText.texture!.filteringMode = .nearest
-        scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.64 * self.size.height)
+        scoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.7 * self.size.height)
         scoreText.size = CGSize(width: 0.3625 * self.size.width, height: 0.0625 * self.size.width)
         scoreLabel = self.childNode(withName: "scoreLabel") as! SKLabelNode
         scoreLabel.text = "\(score)"
-        scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.56 * self.size.height)
+        scoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.6195 * self.size.height)
         highScoreText = self.childNode(withName: "highScoreText") as! SKSpriteNode
         highScoreText.texture = SKTexture(imageNamed: "highScoreText")
         highScoreText.texture!.filteringMode = .nearest
-        highScoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.47 * self.size.height)
+        highScoreText.position = CGPoint(x: 0.5 * self.size.width, y: 0.55 * self.size.height)
         highScoreText.size = CGSize(width: 0.3625 * self.size.width, height: 0.1375 * self.size.width)
         highScoreLabel = self.childNode(withName: "highScoreLabel") as! SKLabelNode
         highScoreLabel.text = "\(userDefaults.integer(forKey: "highScore"))"
-        highScoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.37 * self.size.height)
+        highScoreLabel.position = CGPoint(x: 0.5 * self.size.width, y: 0.45 * self.size.height)
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
-        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.23 * self.size.height)
+        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.35 * self.size.height)
         newGameButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
+        menuButtonNode = self.childNode(withName: "menuButton") as! SKSpriteNode
+        menuButtonNode.texture = SKTexture(imageNamed: "menuButton")
+        menuButtonNode.texture!.filteringMode = .nearest
+        menuButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.25 * self.size.height)
+        menuButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         
     }
     
@@ -72,6 +78,13 @@ class GameOverScene: SKScene {
                 transition.pausesIncomingScene = false
                 let gameScene = GameScene(size: self.size)
                 self.view?.presentScene(gameScene, transition: transition)
+            }
+            else if node[0].name == "menuButton" {
+                let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
+                transition.pausesOutgoingScene = false
+                transition.pausesIncomingScene = false
+                let menuScene = MenuScene(fileNamed: "MenuScene")
+                self.view?.presentScene(menuScene!, transition: transition)
             }
         }
         
