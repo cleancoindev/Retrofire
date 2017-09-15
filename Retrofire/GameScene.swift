@@ -14,6 +14,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var sand:SKEmitterNode!
     var player:SKSpriteNode!
+    var playerType:Double = 0
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
         didSet {
@@ -47,6 +48,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
         
+        let userDefaults = UserDefaults.standard
+        playerType = userDefaults.double(forKey: "player")
+        playerType == 0 ? playerType = 1 : ()
+        let playerName = "player-" + String(playerType)
+        
         addLives()
         
         sand = SKEmitterNode(fileNamed: "Sand")
@@ -57,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sand.zPosition = -1
         
-        player = SKSpriteNode(imageNamed: "player-1")
+        player = SKSpriteNode(imageNamed: playerName)
         player.position = CGPoint(x: 0.5 * self.size.width, y: 0.1 * self.size.height)
         player.physicsBody = SKPhysicsBody(rectangleOf: player.size)
         player.physicsBody?.isDynamic = true
@@ -85,7 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         var timeInterval = 1.25
         
-        if UserDefaults.standard.bool(forKey: "hard") {
+        if userDefaults.bool(forKey: "hard") {
             timeInterval = 0.75
         }
         
@@ -97,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         motionManger.startAccelerometerUpdates(to: OperationQueue.current!) { (data:CMAccelerometerData?, error:Error?) in
             if let accelerometerData = data {
                 let acceleration = accelerometerData.acceleration
-                self.xAcceleration = 0.2 * CGFloat(acceleration.x)
+                self.xAcceleration = CGFloat(((userDefaults.double(forKey: "player") + 6) / 30) * acceleration.x)
             }
         }
         
