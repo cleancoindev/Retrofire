@@ -12,8 +12,9 @@ class MenuScene: SKScene {
     
     var sand:SKEmitterNode!
     var titleNode:SKSpriteNode!
-    var controlsButtonNode:SKSpriteNode!
     var newGameButtonNode:SKSpriteNode!
+    var controlsButtonNode:SKSpriteNode!
+    var unlocksButtonNode:SKSpriteNode!
     var difficultyButtonNode:SKSpriteNode!
     var difficultyLabelNode:SKSpriteNode!
     
@@ -28,24 +29,29 @@ class MenuScene: SKScene {
         titleNode.texture = SKTexture(imageNamed: "title")
         titleNode.texture!.filteringMode = .nearest
         titleNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.8 * self.size.height)
-        titleNode.size = CGSize(width: 0.8 * self.size.width, height: 0.0625 * self.size.width )
-        controlsButtonNode = self.childNode(withName: "controlsButton") as! SKSpriteNode
-        controlsButtonNode.texture = SKTexture(imageNamed: "controlsButton")
-        controlsButtonNode.texture!.filteringMode = .nearest
-        controlsButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.585 * self.size.height)
-        controlsButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
+        titleNode.size = CGSize(width: 0.8 * self.size.width, height: 0.0625 * self.size.width)
         newGameButtonNode = self.childNode(withName: "newGameButton") as! SKSpriteNode
         newGameButtonNode.texture = SKTexture(imageNamed: "newGameButton")
         newGameButtonNode.texture!.filteringMode = .nearest
-        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.485 * self.size.height)
+        newGameButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.585 * self.size.height)
         newGameButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
+        controlsButtonNode = self.childNode(withName: "controlsButton") as! SKSpriteNode
+        controlsButtonNode.texture = SKTexture(imageNamed: "controlsButton")
+        controlsButtonNode.texture!.filteringMode = .nearest
+        controlsButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.485 * self.size.height)
+        controlsButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
+        unlocksButtonNode = self.childNode(withName: "unlocksButton") as! SKSpriteNode
+        unlocksButtonNode.texture = SKTexture(imageNamed: "unlocksButton")
+        unlocksButtonNode.texture!.filteringMode = .nearest
+        unlocksButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.385 * self.size.height)
+        unlocksButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         difficultyButtonNode = self.childNode(withName: "difficultyButton") as! SKSpriteNode
         difficultyButtonNode.texture = SKTexture(imageNamed: "difficultyButton")
         difficultyButtonNode.texture!.filteringMode = .nearest
-        difficultyButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.385 * self.size.height)
+        difficultyButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.285 * self.size.height)
         difficultyButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         difficultyLabelNode = self.childNode(withName: "difficultyLabel") as! SKSpriteNode
-        difficultyLabelNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.3 * self.size.height)
+        difficultyLabelNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.2 * self.size.height)
         difficultyLabelNode.size = CGSize(width: 0.2875 * self.size.width, height: 0.0625 * self.size.width)
         
         let userDefaults = UserDefaults.standard
@@ -66,19 +72,26 @@ class MenuScene: SKScene {
         
         if let location = touch?.location(in: self) {
             let nodesArray = self.nodes(at: location)
-            if nodesArray.first?.name == "controlsButton" {
+            if nodesArray.first?.name == "newGameButton" {
+                let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
+                transition.pausesOutgoingScene = false
+                transition.pausesIncomingScene = false
+                let gameScene = GameScene(size: self.size)
+                self.view?.presentScene(gameScene, transition: transition)
+            }
+            else if nodesArray.first?.name == "controlsButton" {
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
                 let controlsScene = ControlsScene(fileNamed: "ControlsScene")
                 self.view?.presentScene(controlsScene!, transition: transition)
             }
-            else if nodesArray.first?.name == "newGameButton" {
+            else if nodesArray.first?.name == "unlocksButton" {
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
-                let gameScene = GameScene(size: self.size)
-                self.view?.presentScene(gameScene, transition: transition)
+                let unlocksScene = UnlocksScene(fileNamed: "UnlocksScene")
+                self.view?.presentScene(unlocksScene!, transition: transition)
             }
             else if nodesArray.first?.name == "difficultyButton" {
                 changeDifficulty()
