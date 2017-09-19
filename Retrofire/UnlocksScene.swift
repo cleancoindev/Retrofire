@@ -24,6 +24,9 @@ class UnlocksScene: SKScene {
     var fiveButtonNode:SKSpriteNode!
     var sixButtonNode:SKSpriteNode!
     var menuButtonNode:SKSpriteNode!
+    var unlocked:Int = 0
+    var current:Int = 0
+    var new:Int = 0
     
     override func didMove(to view: SKView) {
         
@@ -31,72 +34,125 @@ class UnlocksScene: SKScene {
         
         let userDefaults = UserDefaults.standard
         
+        unlocked = userDefaults.integer(forKey: "highScore") / 2000
+        
         sand = self.childNode(withName: "sand") as! SKEmitterNode
         sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
-        sand.zPosition = -1
         sand.advanceSimulationTime(25)
         oneNode = self.childNode(withName: "one") as! SKSpriteNode
         oneNode.texture = SKTexture(imageNamed: "player-1")
         oneNode.texture!.filteringMode = .nearest
         oneNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.875 * self.size.height)
         oneNode.size = CGSize(width: 0.10625 * self.size.width, height: 0.19375 * self.size.width)
+        oneNode.zPosition = 1
         twoNode = self.childNode(withName: "two") as! SKSpriteNode
         twoNode.texture = SKTexture(imageNamed: "player-2")
         twoNode.texture!.filteringMode = .nearest
         twoNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.875 * self.size.height)
         twoNode.size = CGSize(width: 0.09375 * self.size.width, height: 0.175 * self.size.width)
+        twoNode.zPosition = 1
         threeNode = self.childNode(withName: "three") as! SKSpriteNode
         threeNode.texture = SKTexture(imageNamed: "player-3")
         threeNode.texture!.filteringMode = .nearest
         threeNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.625 * self.size.height)
         threeNode.size = CGSize(width: 0.11875 * self.size.width, height: 0.2 * self.size.width)
+        threeNode.zPosition = 1
         fourNode = self.childNode(withName: "four") as! SKSpriteNode
         fourNode.texture = SKTexture(imageNamed: "player-4")
         fourNode.texture!.filteringMode = .nearest
         fourNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.625 * self.size.height)
         fourNode.size = CGSize(width: 0.10625 * self.size.width, height: 0.1625 * self.size.width)
+        fourNode.zPosition = 1
         fiveNode = self.childNode(withName: "five") as! SKSpriteNode
         fiveNode.texture = SKTexture(imageNamed: "player-5")
         fiveNode.texture!.filteringMode = .nearest
         fiveNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.375 * self.size.height)
         fiveNode.size = CGSize(width: 0.11875 * self.size.width, height: 0.2 * self.size.width)
+        fiveNode.zPosition = 1
         sixNode = self.childNode(withName: "six") as! SKSpriteNode
         sixNode.texture = SKTexture(imageNamed: "player-6")
         sixNode.texture!.filteringMode = .nearest
         sixNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.375 * self.size.height)
         sixNode.size = CGSize(width: 0.0875 * self.size.width, height: 0.14375 * self.size.width)
+        sixNode.zPosition = 1
         oneButtonNode = self.childNode(withName: "oneButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "player") == 1 ? (oneButtonNode.texture = SKTexture(imageNamed: "ticked")) : (oneButtonNode.texture = SKTexture(imageNamed: "goOneButton"))
+        if userDefaults.integer(forKey: "player") == 1 {
+            oneButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 1
+        }
+        else {
+            oneButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
         oneButtonNode.texture!.filteringMode = .nearest
         oneButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.775 * self.size.height)
         oneButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         twoButtonNode = self.childNode(withName: "twoButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "highScore") >= 1000 ? (twoButtonNode.texture = SKTexture(imageNamed: "goTwoButton")) : (twoButtonNode.texture = SKTexture(imageNamed: "unlock-2"))
-        userDefaults.integer(forKey: "player") == 2 ? twoButtonNode.texture = SKTexture(imageNamed: "ticked") : ()
+        if userDefaults.integer(forKey: "player") == 2 {
+            twoButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 2
+        }
+        else if unlocked >= 1 {
+            twoButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
+        else {
+            twoButtonNode.texture = SKTexture(imageNamed: "unlock-2")
+        }
         twoButtonNode.texture!.filteringMode = .nearest
         twoButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.775 * self.size.height)
         twoButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         threeButtonNode = self.childNode(withName: "threeButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "highScore") >= 2500 ? (threeButtonNode.texture = SKTexture(imageNamed: "goThreeButton")) : (threeButtonNode.texture = SKTexture(imageNamed: "unlock-3"))
-        userDefaults.integer(forKey: "player") == 3 ? threeButtonNode.texture = SKTexture(imageNamed: "ticked") : ()
+        if userDefaults.integer(forKey: "player") == 3 {
+            threeButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 3
+        }
+        else if unlocked >= 2 {
+            threeButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
+        else {
+            threeButtonNode.texture = SKTexture(imageNamed: "unlock-3")
+        }
         threeButtonNode.texture!.filteringMode = .nearest
         threeButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.525 * self.size.height)
         threeButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         fourButtonNode = self.childNode(withName: "fourButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "highScore") >= 5000 ? (fourButtonNode.texture = SKTexture(imageNamed: "goFourButton")) : (fourButtonNode.texture = SKTexture(imageNamed: "unlock-4"))
-        userDefaults.integer(forKey: "player") == 4 ? fourButtonNode.texture = SKTexture(imageNamed: "ticked") : ()
+        if userDefaults.integer(forKey: "player") == 4 {
+            fourButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 4
+        }
+        else if unlocked >= 3 {
+            fourButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
+        else {
+            fourButtonNode.texture = SKTexture(imageNamed: "unlock-4")
+        }
         fourButtonNode.texture!.filteringMode = .nearest
         fourButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.525 * self.size.height)
         fourButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         fiveButtonNode = self.childNode(withName: "fiveButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "highScore") >= 8000 ? (fiveButtonNode.texture = SKTexture(imageNamed: "goFiveButton")) : (fiveButtonNode.texture = SKTexture(imageNamed: "unlock-5"))
-        userDefaults.integer(forKey: "player") == 5 ? fiveButtonNode.texture = SKTexture(imageNamed: "ticked") : ()
+        if userDefaults.integer(forKey: "player") == 5 {
+            fiveButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 5
+        }
+        else if unlocked >= 4 {
+            fiveButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
+        else {
+            fiveButtonNode.texture = SKTexture(imageNamed: "unlock-5")
+        }
         fiveButtonNode.texture!.filteringMode = .nearest
         fiveButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.275 * self.size.height)
         fiveButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         sixButtonNode = self.childNode(withName: "sixButton") as! SKSpriteNode
-        userDefaults.integer(forKey: "highScore") >= 10000 ? (sixButtonNode.texture = SKTexture(imageNamed: "goSixButton")) : (sixButtonNode.texture = SKTexture(imageNamed: "unlock-6"))
-        userDefaults.integer(forKey: "player") == 6 ? sixButtonNode.texture = SKTexture(imageNamed: "ticked") : ()
+        if userDefaults.integer(forKey: "player") == 6 {
+            sixButtonNode.texture = SKTexture(imageNamed: "ticked")
+            current = 6
+        }
+        else if unlocked == 5 {
+            sixButtonNode.texture = SKTexture(imageNamed: "goButton")
+        }
+        else {
+            sixButtonNode.texture = SKTexture(imageNamed: "unlock-6")
+        }
         sixButtonNode.texture!.filteringMode = .nearest
         sixButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.275 * self.size.height)
         sixButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
@@ -105,7 +161,6 @@ class UnlocksScene: SKScene {
         menuButtonNode.texture!.filteringMode = .nearest
         menuButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.125 * self.size.height)
         menuButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
-        menuButtonNode.zPosition = -1
         
     }
     
@@ -116,43 +171,50 @@ class UnlocksScene: SKScene {
         
         if let location = touch?.location(in: self) {
             let nodesArray = self.nodes(at: location)
-            if nodesArray.first?.name == "goOneButton" {
+            if nodesArray.first?.name == "oneButton" && current != 1 {
                 oneButtonNode.texture = SKTexture(imageNamed: "ticked")
                 oneButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(1, forKey: "player")
-                userDefaults.synchronize()
+                new = 1
+                untick()
             }
-            else if nodesArray.first?.name == "goTwoButton" {
+            else if nodesArray.first?.name == "twoButton" && unlocked >= 1 && current != 2 {
                 twoButtonNode.texture = SKTexture(imageNamed: "ticked")
                 twoButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(2, forKey: "player")
-                userDefaults.synchronize()
+                new = 2
+                untick()
             }
-            else if nodesArray.first?.name == "goTheeButton" {
+            else if nodesArray.first?.name == "threeButton" && unlocked >= 2 && current != 3 {
                 threeButtonNode.texture = SKTexture(imageNamed: "ticked")
                 threeButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(3, forKey: "player")
-                userDefaults.synchronize()
+                new = 3
+                untick()
             }
-            else if nodesArray.first?.name == "goFourButton" {
+            else if nodesArray.first?.name == "fourButton" && unlocked >= 3 && current != 4 {
                 fourButtonNode.texture = SKTexture(imageNamed: "ticked")
                 fourButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(4, forKey: "player")
-                userDefaults.synchronize()
+                new = 4
+                untick()
             }
-            else if nodesArray.first?.name == "goFiveButton" {
+            else if nodesArray.first?.name == "fiveButton" && unlocked >= 4 && current != 5 {
                 fiveButtonNode.texture = SKTexture(imageNamed: "ticked")
                 fiveButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(5, forKey: "player")
-                userDefaults.synchronize()
+                new = 5
+                untick()
             }
-            else if nodesArray.first?.name == "goSixButton" {
+            else if nodesArray.first?.name == "sixButton" && unlocked >= 5 && current != 6 {
                 sixButtonNode.texture = SKTexture(imageNamed: "ticked")
                 sixButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(6, forKey: "player")
-                userDefaults.synchronize()
+                new = 6
+                untick()
             }
-            else if nodesArray.first?.name == "menuButton" {
+            userDefaults.synchronize()
+            if nodesArray.first?.name == "menuButton" {
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
@@ -161,6 +223,36 @@ class UnlocksScene: SKScene {
             }
             
         }
+        
+    }
+    
+    func untick() {
+        
+        if current == 1 {
+            oneButtonNode.texture = SKTexture(imageNamed: "goButton")
+            oneButtonNode.texture!.filteringMode = .nearest
+        }
+        else if current == 2 {
+            twoButtonNode.texture = SKTexture(imageNamed: "goButton")
+            twoButtonNode.texture!.filteringMode = .nearest
+        }
+        else if current == 3 {
+            threeButtonNode.texture = SKTexture(imageNamed: "goButton")
+            threeButtonNode.texture!.filteringMode = .nearest
+        }
+        else if current == 4 {
+            fourButtonNode.texture = SKTexture(imageNamed: "goButton")
+            fourButtonNode.texture!.filteringMode = .nearest
+        }
+        else if current == 5 {
+            fiveButtonNode.texture = SKTexture(imageNamed: "goButton")
+            fiveButtonNode.texture!.filteringMode = .nearest
+        }
+        else if current == 6 {
+            sixButtonNode.texture = SKTexture(imageNamed: "goButton")
+            sixButtonNode.texture!.filteringMode = .nearest
+        }
+        current = new
         
     }
     
