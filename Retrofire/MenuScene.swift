@@ -20,7 +20,7 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
+        self.backgroundColor = SKColor(red: 230.0/255.0, green: 220.0/255.0, blue:175.0/255.0, alpha: 0)
         
         sand = self.childNode(withName: "sand") as! SKEmitterNode
         sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)

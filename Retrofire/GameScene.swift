@@ -18,7 +18,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel:SKLabelNode!
     var score:Int = 0 {
         didSet {
-            scoreLabel.text = "Score: \(score)"
+            scoreLabel.text = "\(score)"
         }
     }
     var bossLives:Int = 0
@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
-        self.backgroundColor = SKColor(colorLiteralRed: 230/255, green: 220/255, blue: 175/255, alpha: 0)
+        self.backgroundColor = SKColor(red: 230.0/255.0, green: 220.0/255.0, blue:175.0/255.0, alpha: 0)
         
         let userDefaults = UserDefaults.standard
         playerType = userDefaults.double(forKey: "player")
@@ -78,11 +78,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         self.physicsWorld.contactDelegate = self
         
-        scoreLabel = SKLabelNode(text: "Score: 0")
-        scoreLabel.position = CGPoint(x: 0.225 * self.size.width, y: 0.935 * self.size.height)
+        scoreLabel = SKLabelNode(text: "0")
+        scoreLabel.position = CGPoint(x: 0.08 * self.size.width, y: 0.912 * self.size.height)
         scoreLabel.fontName = "AmericanTypewriter-Bold"
-        scoreLabel.fontSize = 28
+        scoreLabel.fontSize = 36
         scoreLabel.fontColor = UIColor.black
+        scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         score = 0
         
         self.addChild(scoreLabel)
@@ -120,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lifeNode.texture!.filteringMode = .nearest
             lifeNode.setScale(5)
             
-            lifeNode.position = CGPoint(x: self.size.width - 1.1 * CGFloat(4 - lives) * lifeNode.size.width, y: 0.95 * self.size.height)
+            lifeNode.position = CGPoint(x: 0.88 * self.size.width - 1.15 * CGFloat(3 - lives) * lifeNode.size.width, y: 0.93 * self.size.height)
             
             self.addChild(lifeNode)
             
@@ -132,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func addEnemy() {
+    @objc func addEnemy() {
         
         enemyList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: enemyList) as! [String]
         let enemy = SKSpriteNode(imageNamed: enemyList[0])
@@ -161,7 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func addScenery() {
+    @objc func addScenery() {
         
         sceneryList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: sceneryList) as! [String]
         let scenery = SKSpriteNode(imageNamed: sceneryList[0])
@@ -187,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
 
-    func addBoss() {
+    @objc func addBoss() {
         
         bossLives = 10
         bossList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: bossList) as! [String]
@@ -293,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.removeFromParent()
         }
         
-        score += 5
+        score += 10
         
     }
     
@@ -311,6 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bulletNode.removeFromParent()
         if bossLives < 2 {
             bossNode.removeFromParent()
+            score += 500
         }
         else {
             bossLives -= 1
@@ -319,8 +321,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
         }
-        
-        score += 100
         
     }
     
