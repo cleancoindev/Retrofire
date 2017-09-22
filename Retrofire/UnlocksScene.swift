@@ -42,37 +42,37 @@ class UnlocksScene: SKScene {
         oneNode = self.childNode(withName: "one") as! SKSpriteNode
         oneNode.texture = SKTexture(imageNamed: "player-1")
         oneNode.texture!.filteringMode = .nearest
-        oneNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.875 * self.size.height)
+        oneNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.9 * self.size.height)
         oneNode.size = CGSize(width: 0.10625 * self.size.width, height: 0.19375 * self.size.width)
         oneNode.zPosition = 1
         twoNode = self.childNode(withName: "two") as! SKSpriteNode
         twoNode.texture = SKTexture(imageNamed: "player-2")
         twoNode.texture!.filteringMode = .nearest
-        twoNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.875 * self.size.height)
+        twoNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.9 * self.size.height)
         twoNode.size = CGSize(width: 0.09375 * self.size.width, height: 0.175 * self.size.width)
         twoNode.zPosition = 1
         threeNode = self.childNode(withName: "three") as! SKSpriteNode
         threeNode.texture = SKTexture(imageNamed: "player-3")
         threeNode.texture!.filteringMode = .nearest
-        threeNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.625 * self.size.height)
+        threeNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.65 * self.size.height)
         threeNode.size = CGSize(width: 0.11875 * self.size.width, height: 0.2 * self.size.width)
         threeNode.zPosition = 1
         fourNode = self.childNode(withName: "four") as! SKSpriteNode
         fourNode.texture = SKTexture(imageNamed: "player-4")
         fourNode.texture!.filteringMode = .nearest
-        fourNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.625 * self.size.height)
+        fourNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.65 * self.size.height)
         fourNode.size = CGSize(width: 0.10625 * self.size.width, height: 0.1625 * self.size.width)
         fourNode.zPosition = 1
         fiveNode = self.childNode(withName: "five") as! SKSpriteNode
         fiveNode.texture = SKTexture(imageNamed: "player-5")
         fiveNode.texture!.filteringMode = .nearest
-        fiveNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.375 * self.size.height)
+        fiveNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.4 * self.size.height)
         fiveNode.size = CGSize(width: 0.11875 * self.size.width, height: 0.2 * self.size.width)
         fiveNode.zPosition = 1
         sixNode = self.childNode(withName: "six") as! SKSpriteNode
         sixNode.texture = SKTexture(imageNamed: "player-6")
         sixNode.texture!.filteringMode = .nearest
-        sixNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.375 * self.size.height)
+        sixNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.4 * self.size.height)
         sixNode.size = CGSize(width: 0.0875 * self.size.width, height: 0.14375 * self.size.width)
         sixNode.zPosition = 1
         oneButtonNode = self.childNode(withName: "oneButton") as! SKSpriteNode
@@ -84,7 +84,7 @@ class UnlocksScene: SKScene {
             oneButtonNode.texture = SKTexture(imageNamed: "goButton")
         }
         oneButtonNode.texture!.filteringMode = .nearest
-        oneButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.775 * self.size.height)
+        oneButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.8 * self.size.height)
         oneButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         twoButtonNode = self.childNode(withName: "twoButton") as! SKSpriteNode
         if userDefaults.integer(forKey: "player") == 2 {
@@ -98,7 +98,7 @@ class UnlocksScene: SKScene {
             twoButtonNode.texture = SKTexture(imageNamed: "unlock-2")
         }
         twoButtonNode.texture!.filteringMode = .nearest
-        twoButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.775 * self.size.height)
+        twoButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.8 * self.size.height)
         twoButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         threeButtonNode = self.childNode(withName: "threeButton") as! SKSpriteNode
         if userDefaults.integer(forKey: "player") == 3 {
@@ -112,7 +112,7 @@ class UnlocksScene: SKScene {
             threeButtonNode.texture = SKTexture(imageNamed: "unlock-3")
         }
         threeButtonNode.texture!.filteringMode = .nearest
-        threeButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.525 * self.size.height)
+        threeButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.55 * self.size.height)
         threeButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         fourButtonNode = self.childNode(withName: "fourButton") as! SKSpriteNode
         if userDefaults.integer(forKey: "player") == 4 {
@@ -126,7 +126,7 @@ class UnlocksScene: SKScene {
             fourButtonNode.texture = SKTexture(imageNamed: "unlock-4")
         }
         fourButtonNode.texture!.filteringMode = .nearest
-        fourButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.525 * self.size.height)
+        fourButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.55 * self.size.height)
         fourButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         fiveButtonNode = self.childNode(withName: "fiveButton") as! SKSpriteNode
         if userDefaults.integer(forKey: "player") == 5 {
@@ -140,7 +140,7 @@ class UnlocksScene: SKScene {
             fiveButtonNode.texture = SKTexture(imageNamed: "unlock-5")
         }
         fiveButtonNode.texture!.filteringMode = .nearest
-        fiveButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.275 * self.size.height)
+        fiveButtonNode.position = CGPoint(x: 0.25 * self.size.width, y: 0.3 * self.size.height)
         fiveButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         sixButtonNode = self.childNode(withName: "sixButton") as! SKSpriteNode
         if userDefaults.integer(forKey: "player") == 6 {
@@ -154,12 +154,12 @@ class UnlocksScene: SKScene {
             sixButtonNode.texture = SKTexture(imageNamed: "unlock-6")
         }
         sixButtonNode.texture!.filteringMode = .nearest
-        sixButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.275 * self.size.height)
+        sixButtonNode.position = CGPoint(x: 0.75 * self.size.width, y: 0.3 * self.size.height)
         sixButtonNode.size = CGSize(width: 0.4 * self.size.width, height: 0.1125 * self.size.width)
         menuButtonNode = self.childNode(withName: "menuButton") as! SKSpriteNode
         menuButtonNode.texture = SKTexture(imageNamed: "menuButton")
         menuButtonNode.texture!.filteringMode = .nearest
-        menuButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.125 * self.size.height)
+        menuButtonNode.position = CGPoint(x: 0.5 * self.size.width, y: 0.175 * self.size.height)
         menuButtonNode.size = CGSize(width: 0.8 * self.size.width, height: 0.1125 * self.size.width)
         
     }
