@@ -6,30 +6,69 @@
 //  Copyright © 2017 Turner Dhir LLP. All rights reserved.
 //
 
+import GoogleMobileAds
 import UIKit
 import SpriteKit
 import GameplayKit
 
-class GameViewController: UIViewController {
-
+class GameViewController: UIViewController, GADBannerViewDelegate {
+    
+    var bannerView:GADBannerView!
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
+        bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
+        bannerView.adUnitID = "ca-app-pub-3666894956061769/4145467379"
+        bannerView.rootViewController = self
+        bannerView.delegate = self
+        bannerView.frame.origin.y = UIScreen.main.bounds.size.height - bannerView.frame.size.height
+        bannerView.load(GADRequest())
+        
         if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "MenuScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
                 view.presentScene(scene)
             }
-            
             view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
         }
+        
+    }
+    
+    func adViewDidReceiveAd(_ bannerView: GADBannerView) {
+        
+        bannerView.alpha = 0
+        view.addSubview(bannerView)
+        UIView.animate(withDuration: 1, animations: {
+            self.bannerView.alpha = 1
+        })
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.showAd), name: NSNotification.Name(rawValue: "showAd"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.hideAd), name: NSNotification.Name(rawValue: "hideAd"), object: nil)
+        
+    }
+    
+    @objc func showAd() {
+        
+        bannerView.isHidden = false
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.bannerView.alpha = 1
+        })
+        
+    }
+    
+    @objc func hideAd() {
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.bannerView.alpha = 0
+        })
+        bannerView.isHidden = true
+        
     }
 
     override var shouldAutorotate: Bool {
@@ -46,7 +85,6 @@ class GameViewController: UIViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Release any cached data, images, etc that aren't in use.
     }
 
     override var prefersStatusBarHidden: Bool {

@@ -22,6 +22,8 @@ class GameOverScene: SKScene {
     
     override func didMove(to view:SKView) {
         
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "showAd"), object: nil)
+        
         self.backgroundColor = SKColor(red: 230.0/255.0, green: 220.0/255.0, blue:175.0/255.0, alpha: 0)
         
         let userDefaults = UserDefaults.standard
