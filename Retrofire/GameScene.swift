@@ -243,7 +243,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(bullet)
         
-        let animationDuration:TimeInterval = 0.3
+        let animationDuration:TimeInterval = 0.5
         var actionArray = [SKAction]()
         actionArray.append(SKAction.move(to: CGPoint(x: player.position.x, y: self.size.height + bullet.size.height), duration: animationDuration))
         actionArray.append(SKAction.removeFromParent())
@@ -304,21 +304,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         
-        explosion.position = bulletNode.position
         explosion.zPosition = 3
+        
+        if bossLives < 2 {
+            explosion.position = bossNode.position
+            explosion.setScale(2)
+            bossNode.removeFromParent()
+            score += 500
+        }
+        else {
+            explosion.position = bulletNode.position
+            explosion.setScale(0.75)
+            bossLives -= 1
+        }
         
         self.addChild(explosion)
         
         self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
         
         bulletNode.removeFromParent()
-        if bossLives < 2 {
-            bossNode.removeFromParent()
-            score += 500
-        }
-        else {
-            bossLives -= 1
-        }
         
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
