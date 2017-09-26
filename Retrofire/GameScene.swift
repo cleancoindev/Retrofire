@@ -9,8 +9,11 @@
 import SpriteKit
 import GameplayKit
 import CoreMotion
+import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    var music = try? AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: Bundle.main.path(forResource: "music", ofType: "wav")!) as URL)
     
     var sand:SKEmitterNode!
     var player:SKSpriteNode!
@@ -49,6 +52,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         self.backgroundColor = SKColor(red: 230.0/255.0, green: 220.0/255.0, blue:175.0/255.0, alpha: 0)
+        
+        music?.numberOfLoops = -1
+        music?.play()
         
         let userDefaults = UserDefaults.standard
         playerType = userDefaults.double(forKey: "player")
@@ -226,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func fireBullet() {
         
-        self.run(SKAction.playSoundFileNamed("bullet", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("fire", waitForCompletion: false))
         
         let bullet = SKSpriteNode(imageNamed: "bullet")
         
@@ -310,17 +316,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             explosion.position = bossNode.position
             explosion.setScale(2)
             bossNode.removeFromParent()
+            self.run(SKAction.playSoundFileNamed("bossexplosion", waitForCompletion: false))
             score += 500
         }
         else {
             explosion.position = bulletNode.position
             explosion.setScale(0.75)
+            self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
             bossLives -= 1
         }
         
         self.addChild(explosion)
-        
-        self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
         
         bulletNode.removeFromParent()
         
@@ -338,7 +344,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(explosion)
         
-        self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
+        self.run(SKAction.playSoundFileNamed("collision", waitForCompletion: false))
         
         sceneryNode.removeFromParent()
         
@@ -362,7 +368,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 transition.pausesIncomingScene = false
                 let gameOver = SKScene(fileNamed: "GameOverScene") as! GameOverScene
                 gameOver.score = self.score
+                music?.stop()
                 self.view?.presentScene(gameOver, transition: transition)
+                self.run(SKAction.playSoundFileNamed("gameover", waitForCompletion: true))
             }
         }
     }

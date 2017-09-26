@@ -15,9 +15,15 @@
 		E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E41425591F34733E00E7CCAF /* Main.storyboard */; };
 		E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E414255C1F34733E00E7CCAF /* Assets.xcassets */; };
 		E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E414255E1F34733E00E7CCAF /* LaunchScreen.storyboard */; };
+		E42B59611F7A5F4700E282A9 /* bossexplosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B595B1F7A5DEB00E282A9 /* bossexplosion.wav */; };
+		E42B59621F7A5F4A00E282A9 /* collision.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B59601F7A5DEC00E282A9 /* collision.wav */; };
+		E42B59631F7A5F4C00E282A9 /* explosion.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B595E1F7A5DEC00E282A9 /* explosion.wav */; };
+		E42B59641F7A5F4E00E282A9 /* fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B595A1F7A5DEB00E282A9 /* fire.wav */; };
+		E42B59651F7A5F5000E282A9 /* gameover.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B595C1F7A5DEC00E282A9 /* gameover.wav */; };
+		E42B59661F7A5F5200E282A9 /* lifelost.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B595D1F7A5DEC00E282A9 /* lifelost.wav */; };
+		E42B596F1F7A681400E282A9 /* music.wav in Resources */ = {isa = PBXBuildFile; fileRef = E42B596E1F7A681000E282A9 /* music.wav */; };
 		E43E5AD21F39BCC800416DFF /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AD11F39BCC800416DFF /* MenuScene.sks */; };
 		E43E5AD41F39BEDC00416DFF /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E5AD31F39BEDC00416DFF /* MenuScene.swift */; };
-		E43E5AD81F39DC7A00416DFF /* lifelost.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */; };
 		E43E5ADC1F39DEC900416DFF /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */; };
 		E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E43E5AE31F39F1A500416DFF /* GameOverScene.sks */; };
 		E48C605F1F66A5C500F4F73B /* ControlsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48C605E1F66A5C500F4F73B /* ControlsScene.swift */; };
@@ -27,8 +33,6 @@
 		E498FF8D1F6BDF6500531703 /* UnlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E498FF8C1F6BDF6500531703 /* UnlocksScene.sks */; };
 		E4B6AA7E1F76D3DA00FCF3AF /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B6AA7D1F76D3DA00FCF3AF /* GoogleMobileAds.framework */; };
 		E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E4BCA6F01F36392C009D0D2E /* Sand.sks */; };
-		E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B201F3726EB00C9878E /* bullet.mp3 */; };
-		E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E4FF4B211F3726EB00C9878E /* explosion.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,9 +46,15 @@
 		E414255C1F34733E00E7CCAF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E414255F1F34733E00E7CCAF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E41425611F34733E00E7CCAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E42B595A1F7A5DEB00E282A9 /* fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = fire.wav; sourceTree = "<group>"; };
+		E42B595B1F7A5DEB00E282A9 /* bossexplosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bossexplosion.wav; sourceTree = "<group>"; };
+		E42B595C1F7A5DEC00E282A9 /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
+		E42B595D1F7A5DEC00E282A9 /* lifelost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = lifelost.wav; sourceTree = "<group>"; };
+		E42B595E1F7A5DEC00E282A9 /* explosion.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = explosion.wav; sourceTree = "<group>"; };
+		E42B59601F7A5DEC00E282A9 /* collision.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = collision.wav; sourceTree = "<group>"; };
+		E42B596E1F7A681000E282A9 /* music.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = music.wav; sourceTree = "<group>"; };
 		E43E5AD11F39BCC800416DFF /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		E43E5AD31F39BEDC00416DFF /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
-		E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lifelost.mp3; sourceTree = "<group>"; };
 		E43E5ADB1F39DEC900416DFF /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		E43E5AE31F39F1A500416DFF /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
 		E48C605E1F66A5C500F4F73B /* ControlsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlsScene.swift; sourceTree = "<group>"; };
@@ -54,8 +64,6 @@
 		E498FF8C1F6BDF6500531703 /* UnlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = UnlocksScene.sks; sourceTree = "<group>"; };
 		E4B6AA7D1F76D3DA00FCF3AF /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Retrofire/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		E4BCA6F01F36392C009D0D2E /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sand.sks; sourceTree = "<group>"; };
-		E4FF4B201F3726EB00C9878E /* bullet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bullet.mp3; sourceTree = "<group>"; };
-		E4FF4B211F3726EB00C9878E /* explosion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = explosion.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,9 +189,13 @@
 		E4FF4B1F1F3726EB00C9878E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				E4FF4B201F3726EB00C9878E /* bullet.mp3 */,
-				E4FF4B211F3726EB00C9878E /* explosion.mp3 */,
-				E43E5AD71F39DC7A00416DFF /* lifelost.mp3 */,
+				E42B595B1F7A5DEB00E282A9 /* bossexplosion.wav */,
+				E42B59601F7A5DEC00E282A9 /* collision.wav */,
+				E42B595E1F7A5DEC00E282A9 /* explosion.wav */,
+				E42B595A1F7A5DEB00E282A9 /* fire.wav */,
+				E42B595C1F7A5DEC00E282A9 /* gameover.wav */,
+				E42B595D1F7A5DEC00E282A9 /* lifelost.wav */,
+				E42B596E1F7A681000E282A9 /* music.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -249,19 +261,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E42B59641F7A5F4E00E282A9 /* fire.wav in Resources */,
 				E498FF8D1F6BDF6500531703 /* UnlocksScene.sks in Resources */,
-				E4FF4B221F3726EB00C9878E /* bullet.mp3 in Resources */,
+				E42B596F1F7A681400E282A9 /* music.wav in Resources */,
 				E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */,
-				E43E5AD81F39DC7A00416DFF /* lifelost.mp3 in Resources */,
+				E42B59631F7A5F4C00E282A9 /* explosion.wav in Resources */,
 				E414255B1F34733E00E7CCAF /* Main.storyboard in Resources */,
 				E41425521F34733E00E7CCAF /* GameScene.sks in Resources */,
 				E43E5AD21F39BCC800416DFF /* MenuScene.sks in Resources */,
-				E4FF4B231F3726EB00C9878E /* explosion.mp3 in Resources */,
+				E42B59611F7A5F4700E282A9 /* bossexplosion.wav in Resources */,
 				E48CB69E1F781996006C9F39 /* Explosion.sks in Resources */,
+				E42B59661F7A5F5200E282A9 /* lifelost.wav in Resources */,
 				E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */,
 				E414255D1F34733E00E7CCAF /* Assets.xcassets in Resources */,
 				E48C60611F66A5D100F4F73B /* ControlsScene.sks in Resources */,
+				E42B59621F7A5F4A00E282A9 /* collision.wav in Resources */,
 				E41425601F34733E00E7CCAF /* LaunchScreen.storyboard in Resources */,
+				E42B59651F7A5F5000E282A9 /* gameover.wav in Resources */,
 				E41425541F34733E00E7CCAF /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
