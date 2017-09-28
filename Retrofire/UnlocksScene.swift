@@ -172,6 +172,7 @@ class UnlocksScene: SKScene {
         if let location = touch?.location(in: self) {
             let nodesArray = self.nodes(at: location)
             if nodesArray.first?.name == "oneButton" && current != 1 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 oneButtonNode.texture = SKTexture(imageNamed: "ticked")
                 oneButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(1, forKey: "player")
@@ -179,6 +180,7 @@ class UnlocksScene: SKScene {
                 untick()
             }
             else if nodesArray.first?.name == "twoButton" && unlocked >= 1 && current != 2 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 twoButtonNode.texture = SKTexture(imageNamed: "ticked")
                 twoButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(2, forKey: "player")
@@ -186,6 +188,7 @@ class UnlocksScene: SKScene {
                 untick()
             }
             else if nodesArray.first?.name == "threeButton" && unlocked >= 2 && current != 3 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 threeButtonNode.texture = SKTexture(imageNamed: "ticked")
                 threeButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(3, forKey: "player")
@@ -193,6 +196,7 @@ class UnlocksScene: SKScene {
                 untick()
             }
             else if nodesArray.first?.name == "fourButton" && unlocked >= 3 && current != 4 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 fourButtonNode.texture = SKTexture(imageNamed: "ticked")
                 fourButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(4, forKey: "player")
@@ -200,6 +204,7 @@ class UnlocksScene: SKScene {
                 untick()
             }
             else if nodesArray.first?.name == "fiveButton" && unlocked >= 4 && current != 5 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 fiveButtonNode.texture = SKTexture(imageNamed: "ticked")
                 fiveButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(5, forKey: "player")
@@ -207,6 +212,7 @@ class UnlocksScene: SKScene {
                 untick()
             }
             else if nodesArray.first?.name == "sixButton" && unlocked >= 5 && current != 6 {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 sixButtonNode.texture = SKTexture(imageNamed: "ticked")
                 sixButtonNode.texture!.filteringMode = .nearest
                 userDefaults.set(6, forKey: "player")
@@ -215,6 +221,7 @@ class UnlocksScene: SKScene {
             }
             userDefaults.synchronize()
             if nodesArray.first?.name == "menuButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false

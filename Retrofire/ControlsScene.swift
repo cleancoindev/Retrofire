@@ -40,6 +40,7 @@ class ControlsScene: SKScene {
         if let location = touch?.location(in: self) {
             let node = self.nodes(at: location)
             if node[0].name == "menuButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false

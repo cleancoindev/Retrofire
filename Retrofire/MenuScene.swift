@@ -73,6 +73,7 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self) {
             let nodesArray = self.nodes(at: location)
             if nodesArray.first?.name == "newGameButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
@@ -80,6 +81,7 @@ class MenuScene: SKScene {
                 self.view?.presentScene(gameScene, transition: transition)
             }
             else if nodesArray.first?.name == "controlsButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
@@ -87,6 +89,7 @@ class MenuScene: SKScene {
                 self.view?.presentScene(controlsScene!, transition: transition)
             }
             else if nodesArray.first?.name == "unlocksButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 let transition = SKTransition.fade(with: SKColor.white, duration: 0.5)
                 transition.pausesOutgoingScene = false
                 transition.pausesIncomingScene = false
@@ -94,6 +97,7 @@ class MenuScene: SKScene {
                 self.view?.presentScene(unlocksScene!, transition: transition)
             }
             else if nodesArray.first?.name == "difficultyButton" {
+                self.run(SKAction.playSoundFileNamed("tap", waitForCompletion: false))
                 changeDifficulty()
             }
         }

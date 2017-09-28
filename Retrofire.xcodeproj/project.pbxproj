@@ -31,6 +31,7 @@
 		E48CB69E1F781996006C9F39 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E48CB69D1F781996006C9F39 /* Explosion.sks */; };
 		E498FF8B1F6BDF5000531703 /* UnlocksScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E498FF8A1F6BDF5000531703 /* UnlocksScene.swift */; };
 		E498FF8D1F6BDF6500531703 /* UnlocksScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E498FF8C1F6BDF6500531703 /* UnlocksScene.sks */; };
+		E4B2E1F71F7D3BF9007A2B16 /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = E4B2E1F61F7D3BF5007A2B16 /* tap.wav */; };
 		E4B6AA7E1F76D3DA00FCF3AF /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4B6AA7D1F76D3DA00FCF3AF /* GoogleMobileAds.framework */; };
 		E4BCA6F11F36392C009D0D2E /* Sand.sks in Resources */ = {isa = PBXBuildFile; fileRef = E4BCA6F01F36392C009D0D2E /* Sand.sks */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		E48CB69D1F781996006C9F39 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		E498FF8A1F6BDF5000531703 /* UnlocksScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnlocksScene.swift; sourceTree = "<group>"; };
 		E498FF8C1F6BDF6500531703 /* UnlocksScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = UnlocksScene.sks; sourceTree = "<group>"; };
+		E4B2E1F61F7D3BF5007A2B16 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tap.wav; sourceTree = "<group>"; };
 		E4B6AA7D1F76D3DA00FCF3AF /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = Retrofire/GoogleMobileAds.framework; sourceTree = "<group>"; };
 		E4BCA6F01F36392C009D0D2E /* Sand.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Sand.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +198,7 @@
 				E42B595C1F7A5DEC00E282A9 /* gameover.wav */,
 				E42B595D1F7A5DEC00E282A9 /* lifelost.wav */,
 				E42B596E1F7A681000E282A9 /* music.wav */,
+				E4B2E1F61F7D3BF5007A2B16 /* tap.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			files = (
 				E42B59641F7A5F4E00E282A9 /* fire.wav in Resources */,
 				E498FF8D1F6BDF6500531703 /* UnlocksScene.sks in Resources */,
+				E4B2E1F71F7D3BF9007A2B16 /* tap.wav in Resources */,
 				E42B596F1F7A681400E282A9 /* music.wav in Resources */,
 				E43E5AE41F39F1A500416DFF /* GameOverScene.sks in Resources */,
 				E42B59631F7A5F4C00E282A9 /* explosion.wav in Resources */,
