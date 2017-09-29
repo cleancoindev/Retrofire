@@ -50,7 +50,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideAd"), object: nil)
         
         self.size = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        
         self.backgroundColor = SKColor(red: 230.0/255.0, green: 220.0/255.0, blue:175.0/255.0, alpha: 0)
         
         music?.numberOfLoops = -1
@@ -65,11 +64,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sand = SKEmitterNode(fileNamed: "Sand")
         sand.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height)
-        sand.advanceSimulationTime(25)
-        
-        self.addChild(sand)
-        
         sand.zPosition = -1
+        sand.advanceSimulationTime(25)
+        self.addChild(sand)
         
         player = SKSpriteNode(imageNamed: playerName)
         player.position = CGPoint(x: 0.5 * self.size.width, y: 0.1 * self.size.height)
@@ -80,7 +77,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.collisionBitMask = 0
         player.texture!.filteringMode = .nearest
         player.setScale(2.5)
-        
         self.addChild(player)
         
         self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -88,22 +84,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         scoreLabel = SKLabelNode(text: "0")
         scoreLabel.position = CGPoint(x: 0.08 * self.size.width, y: 0.912 * self.size.height)
+        scoreLabel.zPosition = 4
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         scoreLabel.fontSize = 36
         scoreLabel.fontColor = UIColor.black
         scoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         score = 0
-        
         self.addChild(scoreLabel)
         
-        scoreLabel.zPosition = 4
-        
         var timeInterval = 1.25
-        
         if userDefaults.bool(forKey: "hard") {
             timeInterval = 0.75
         }
-        
         enemyTimer = Timer.scheduledTimer(timeInterval: timeInterval, target: self, selector: #selector(addEnemy), userInfo: nil, repeats: true)
         sceneryTimer = Timer.scheduledTimer(timeInterval: 7, target: self, selector: #selector(addScenery), userInfo: nil, repeats: true)
         bossTimer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(addBoss), userInfo: nil, repeats: true)
@@ -125,15 +117,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for lives in 1 ... 3 {
             
             let lifeNode = SKSpriteNode(imageNamed: "heart")
-            
             lifeNode.texture!.filteringMode = .nearest
             lifeNode.setScale(5)
-            
-            lifeNode.position = CGPoint(x: 0.88 * self.size.width - 1.15 * CGFloat(3 - lives) * lifeNode.size.width, y: 0.93 * self.size.height)
-            
-            self.addChild(lifeNode)
-            
+            lifeNode.position = CGPoint(x: 0.88 * self.size.width - 1.15 * CGFloat(3 - lives) * lifeNode.size.width, y: 0.93 * self.size.height) // Must be defined after setScale
             lifeNode.zPosition = 4
+            self.addChild(lifeNode)
             
             livesArray.append(lifeNode)
             
@@ -149,6 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let position = CGFloat(generateEnemyPosition.nextInt())
         
         enemy.position = CGPoint(x: position, y: self.size.height + 2.5 * enemy.size.height) // Multiplier must match enemy.setScale below
+        enemy.zPosition = 1
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
         enemy.physicsBody?.isDynamic = true
         enemy.physicsBody?.categoryBitMask = enemyCategory
@@ -156,10 +145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody?.collisionBitMask = 0
         enemy.texture!.filteringMode = .nearest
         enemy.setScale(2.5)
-        
         self.addChild(enemy)
-        
-        enemy.zPosition = 1
         
         let animationDuration:TimeInterval = 7
         var actionArray = [SKAction]()
@@ -185,7 +171,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scenery.physicsBody?.collisionBitMask = 0
         scenery.texture!.filteringMode = .nearest
         scenery.setScale(2.5)
-        
         self.addChild(scenery)
         
         let animationDuration:TimeInterval = 0.0369 * Double(self.size.height) // Matches Sand.sks speed, defined in terms of screen height for consistency across devices
@@ -201,7 +186,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bossLives = 10
         bossList = GKRandomSource.sharedRandom().arrayByShufflingObjects(in: bossList) as! [String]
         let boss = SKSpriteNode(imageNamed: bossList[0])
+        
         boss.position = CGPoint(x: 0.5 * self.size.width, y: self.size.height + 5 * boss.size.height) // Multiplier must match boss.setScale below
+        boss.zPosition = 2
         boss.physicsBody = SKPhysicsBody(rectangleOf: boss.size)
         boss.physicsBody?.isDynamic = true
         boss.physicsBody?.categoryBitMask = bossCategory
@@ -209,10 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         boss.physicsBody?.collisionBitMask = 0
         boss.texture!.filteringMode = .nearest
         boss.setScale(5)
-        
         self.addChild(boss)
-        
-        boss.zPosition = 2
         
         let animationDuration:TimeInterval = 14
         var actionArray = [SKAction]()
@@ -244,9 +228,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bullet.physicsBody?.contactTestBitMask = enemyCategory | bossCategory
         bullet.physicsBody?.collisionBitMask = 0
         bullet.physicsBody?.usesPreciseCollisionDetection = true
-        bullet.texture!.filteringMode = .nearest // Maybe remove line if keeping art a uniform colour rectangle - perhaps this method is actually less resource intensive?
+        bullet.texture!.filteringMode = .nearest
         bullet.setScale(5)
-        
         self.addChild(bullet)
         
         let animationDuration:TimeInterval = 0.5
@@ -290,14 +273,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         
         explosion.position = enemyNode.position
-        
         self.addChild(explosion)
         
         self.run(SKAction.playSoundFileNamed("explosion", waitForCompletion: false))
         
         bulletNode.removeFromParent()
         enemyNode.removeFromParent()
-        
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
         }
@@ -329,7 +310,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(explosion)
         
         bulletNode.removeFromParent()
-        
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
         }
@@ -341,13 +321,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let explosion = SKEmitterNode(fileNamed: "Explosion")!
         
         explosion.position = sceneryNode.position
-        
         self.addChild(explosion)
         
         self.run(SKAction.playSoundFileNamed("collision", waitForCompletion: false))
         
         sceneryNode.removeFromParent()
-        
         self.run(SKAction.wait(forDuration: 2)) {
             explosion.removeFromParent()
         }
@@ -357,7 +335,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func lifeLost() {
+        
         self.run(SKAction.playSoundFileNamed("lifelost", waitForCompletion: false))
+        
         if self.livesArray.count > 0 {
             let lifeNode = self.livesArray.first
             lifeNode!.removeFromParent()
@@ -373,6 +353,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.run(SKAction.playSoundFileNamed("gameover", waitForCompletion: true))
             }
         }
+        
     }
     
     override func didSimulatePhysics() {
@@ -388,7 +369,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
 }

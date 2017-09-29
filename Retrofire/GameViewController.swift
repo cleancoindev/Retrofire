@@ -83,11 +83,8 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
 }
