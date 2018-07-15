@@ -3,7 +3,7 @@
 //  Retrofire
 //
 //  Created by Theo Turner on 04/08/2017.
-//  Copyright © 2017 Turner Dhir LLP. All rights reserved.
+//  Copyright © 2018 Theo Turner. All rights reserved.
 //
 
 import GoogleMobileAds
@@ -20,7 +20,7 @@ class GameViewController: UIViewController, GADBannerViewDelegate {
         super.viewDidLoad()
         
         bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerPortrait)
-        bannerView.adUnitID = "ca-app-pub-3666894956061769/4145467379"
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.frame.origin.y = UIScreen.main.bounds.size.height - bannerView.frame.size.height

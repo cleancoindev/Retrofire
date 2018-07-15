@@ -3,7 +3,7 @@
 //  Retrofire
 //
 //  Created by Theo Turner on 04/08/2017.
-//  Copyright © 2017 Turner Dhir LLP. All rights reserved.
+//  Copyright © 2018 Theo Turner. All rights reserved.
 //
 
 import SpriteKit
