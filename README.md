@@ -14,5 +14,5 @@ The player has three lives, the game tracks high score and doing well unlocks ve
 The front end is implemented with Swift using Apple's SpriteKit.
 Core functionality uses Objective-C.
 The procedural generation is mixed: dynamic positioning of a static object set.
-Ad integration is done with the Google Mobile Ads API.
+Ad integration is done with the Google Mobile Ads API for iOS.
 All artwork was hand-painted and special effects are programmatic.
