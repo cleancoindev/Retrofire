@@ -1,6 +1,6 @@
 # Retrofire
 
-Retro iOS game: endless runner/shooter with tilt controls, player unlocks and ad integration.
+Retro iOS game: endless runner/shooter with tilt controls, player unlocks and ad integration. iOS 10+.
 
 ### Gameplay
 The player drives a tank, holding off flying enemies while navigating terrain.
