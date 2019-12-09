@@ -1,6 +1,6 @@
 # Retrofire
 
-Retro iOS game: endless runner/shooter with tilt controls, player unlocks and ad integration. iOS 10+.
+Retro iOS game: endless runner/shooter with tilt controls, player unlocks and ad integration. Approved on the app store 2018. Requires iOS 10+.
 
 This software is licensed under the MIT software license (see LICENSE file). Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
